@@ -129,7 +129,7 @@ export default function Layout({children,role,mode,handleModeChange}) {
           {children}
           <Paper sx={{backgroundColor:"#000000",mt:1,minHeight:"29px"}}>
         <Typography>
-        this is a footer that i want to display you will be writing here </Typography></Paper>
+        this is a footer that displays top gaining stocks or favorites or top losing stocks </Typography></Paper>
 
         </Box>
         
