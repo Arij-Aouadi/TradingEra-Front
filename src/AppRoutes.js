@@ -26,6 +26,10 @@ const AppRoutes = [
   {
     path: '/assignShipment',
     element: <Home/>
+  },
+  {
+    path: '/stockes',
+    element: <Home/>
   }
 
 ];
