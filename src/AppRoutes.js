@@ -1,6 +1,7 @@
 import LoginForm from "./components/signin/signin";
 import Register from "./pages/Register";
 import Home from "./components/Home/Home";
+import Portefeuille from "./components/Portefeuille/Portefeuille";
 
 const AppRoutes = [
   {
@@ -8,8 +9,8 @@ const AppRoutes = [
     element: <LoginForm />
   },
   {
-    path: '/makeRequest',
-    element: <Home />
+    path: '/Portefeuille',
+    element: <Portefeuille />
   },
   {
       path: '/home',

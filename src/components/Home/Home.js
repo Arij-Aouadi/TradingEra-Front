@@ -1,8 +1,13 @@
 import React from 'react'
 import {Grid, Paper, ThemeProvider, Typography } from '@mui/material'
 import { useTheme } from '@emotion/react'
+<<<<<<< HEAD
 import CandlesChart from '../CandlesChart/CandlesChart'
 import StockList from '../StockList/StockList';
+=======
+import TradingViewWidget from '../CandlesChart/CandlesChart'
+
+>>>>>>> 05b1817398a41dd4d527298e44409a47f46be315
 
 const Home = () => {
   var theme = useTheme();
@@ -18,23 +23,23 @@ const Home = () => {
       <Grid item container xs={10} rowSpacing={1} columnSpacing={1}>
   <Grid item xs={9} sx={{}}>
     <Paper>
-      <CandlesChart></CandlesChart>
-    </Paper>
+      <TradingViewWidget/>    
+      </Paper>
   </Grid>
 
   <Grid item xs={3}>
-    <Paper sx={{minHeight:"49svh"}}>
-    <Typography>2</Typography></Paper>
+    <Paper sx={{minHeight:"49vh"}}>
+    <Typography>Order Book here</Typography></Paper>
   </Grid>
 
   <Grid item xs={9}>
     <Paper sx={{minHeight:"32svh"}}>
-    <Typography>3</Typography></Paper>
+    <Typography>Make an order here</Typography></Paper>
   </Grid>
 
   <Grid item xs={3}>
     <Paper sx={{minHeight:"32svh"}}>
-    <Typography>4</Typography></Paper>
+    <Typography>Positions: orders that went through</Typography></Paper>
   </Grid>
 </Grid>  
 

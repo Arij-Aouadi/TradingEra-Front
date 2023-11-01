@@ -31,7 +31,7 @@ export default function TradingViewWidget() {
         if (document.getElementById('tradingview_a361e') && 'TradingView' in window) {
           new window.TradingView.widget({
             width: 810,
-            height: 340,
+            height: 330,
             symbol: "NASDAQ:AAPL",
             timezone: "Etc/UTC",
             theme: "dark",
