@@ -2,6 +2,7 @@ import React from 'react'
 import {Grid, Paper, ThemeProvider, Typography } from '@mui/material'
 import { useTheme } from '@emotion/react'
 import TradingViewWidget from '../CandlesChart/CandlesChart'
+import MakeNewOrder from '../MakeAnOrder/MakeNewOrder'
 
 
 const Home = () => {
@@ -28,9 +29,10 @@ const Home = () => {
     <Typography>Order Book here</Typography></Paper>
   </Grid>
 
-  <Grid item xs={9}>
+  <Grid item xs={9} sx={{mt:1}}>
     <Paper sx={{minHeight:"32svh"}}>
-    <Typography>Make an order here</Typography></Paper>
+      <MakeNewOrder></MakeNewOrder>
+      </Paper>
   </Grid>
 
   <Grid item xs={3}>
