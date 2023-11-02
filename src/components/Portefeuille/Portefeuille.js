@@ -119,7 +119,7 @@ function Portefeuille () {
       </Grid>
 
       <Grid item xs={2.5} sx={{}}>
-      <Paper sx={{ minHeight: "28vh", padding: 2 }}>
+      <Paper sx={{ minHeight: "45vh", padding: 2 }}>
         <Typography variant="h6" sx={{ borderBottom: '1px solid #ccc', paddingBottom: '8px' }}>Balance</Typography>
         <Box sx={{ display: 'flex', flexDirection: 'column', paddingTop: '8px' }}>
           {balanceData.map((item, index) => (
@@ -138,7 +138,7 @@ function Portefeuille () {
       </Grid>
       
       <Grid item xs={2.5} sx={{}}>
-      <Paper sx={{ minHeight: "28vh", padding: 2 }}>
+      <Paper sx={{ minHeight: "45vh", padding: 2 }}>
         <Typography variant="h6" sx={{ borderBottom: '1px solid #ccc', paddingBottom: '8px' }}>Balance</Typography>
         <Box sx={{ display: 'flex', flexDirection: 'column', paddingTop: '8px' }}>
           {balanceData.map((item, index) => (

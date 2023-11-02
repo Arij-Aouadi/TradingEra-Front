@@ -1,14 +1,9 @@
 import React from 'react'
 import {Grid, Paper, ThemeProvider, Typography } from '@mui/material'
 import { useTheme } from '@emotion/react'
-<<<<<<< HEAD
-import CandlesChart from '../CandlesChart/CandlesChart'
-import StockList from '../StockList/StockList';
-=======
 import TradingViewWidget from '../CandlesChart/CandlesChart'
+import StockList from '../StockList/StockList';
 import MakeNewOrder from '../MakeAnOrder/MakeNewOrder'
-
->>>>>>> 05b1817398a41dd4d527298e44409a47f46be315
 
 const Home = () => {
   var theme = useTheme();

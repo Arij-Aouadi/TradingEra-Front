@@ -3,6 +3,9 @@ import {Grid, Paper, ThemeProvider, Typography,Stack } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import axiosInstance from '../../axios';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -46,7 +49,19 @@ const MakeNewOrder = () => {
              flexDirection: 'column',
              justifyContent: 'space-between'
         }}>
-            <div>helloo</div>
+            <div>
+            <Box
+              component="form"
+              sx={{
+              '& > :not(style)': { m: 1, width: '25ch' },
+              }}
+              noValidate
+              autoComplete="off"
+            >
+            
+            </Box>
+ 
+            </div>
             <Button variant="outlined" 
             size='small'
              color="secondary" 
