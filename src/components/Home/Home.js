@@ -1,13 +1,9 @@
 import React from 'react'
 import {Grid, Paper, ThemeProvider, Typography } from '@mui/material'
 import { useTheme } from '@emotion/react'
-<<<<<<< HEAD
-import CandlesChart from '../CandlesChart/CandlesChart'
-import StockList from '../StockList/StockList';
-=======
 import TradingViewWidget from '../CandlesChart/CandlesChart'
-
->>>>>>> 05b1817398a41dd4d527298e44409a47f46be315
+import StockList from '../StockList/StockList';
+import MakeNewOrder from '../MakeAnOrder/MakeNewOrder'
 
 const Home = () => {
   var theme = useTheme();
@@ -32,9 +28,10 @@ const Home = () => {
     <Typography>Order Book here</Typography></Paper>
   </Grid>
 
-  <Grid item xs={9}>
+  <Grid item xs={9} sx={{mt:1}}>
     <Paper sx={{minHeight:"32svh"}}>
-    <Typography>Make an order here</Typography></Paper>
+      <MakeNewOrder></MakeNewOrder>
+      </Paper>
   </Grid>
 
   <Grid item xs={3}>
