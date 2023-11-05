@@ -1,26 +1,20 @@
 import React from 'react'
 import {Grid, Paper, ThemeProvider, Typography } from '@mui/material'
 import { useTheme } from '@emotion/react'
-<<<<<<< HEAD
-import CandlesChart from '../CandlesChart/CandlesChart'
-import StockList from '../StockList/StockList';
-=======
 import TradingViewWidget from '../CandlesChart/CandlesChart'
-
->>>>>>> 05b1817398a41dd4d527298e44409a47f46be315
-
+import StockList from '../StockList/StockList';
 const Home = () => {
   var theme = useTheme();
   return (
     <ThemeProvider theme={theme}>
     <Grid container spacing={1} width="100%" sx={{mt:2,ml:1}}   >
       
-      <Grid item xs={2} >
+      <Grid item xs={2.5} >
         <Paper sx={{minHeight:"83svh"}} >
         <StockList></StockList>    </Paper>
       </Grid>
 
-      <Grid item container xs={10} rowSpacing={1} columnSpacing={1}>
+      <Grid item container xs={9} rowSpacing={1} columnSpacing={1}>
   <Grid item xs={9} sx={{}}>
     <Paper>
       <TradingViewWidget/>    
