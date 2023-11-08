@@ -62,7 +62,7 @@ export default function Layout({children,role,mode,handleModeChange}) {
           >
             <Grid container sx={{ flexGrow: 1,height:'40px'}} >
 
-      <AppBar position="static" sx={{height:'40px',background:"#000000"}}>
+      <AppBar position="static" sx={{height:'40px',background: `linear-gradient(135deg,#000000, #1e222d) `}}>
         <Toolbar sx={{height:'40px'}} >
 
         <Box href="/" sx={{display: 'inline-flex',height: 32,width: 32,mb:2}}>
@@ -78,23 +78,23 @@ export default function Layout({children,role,mode,handleModeChange}) {
           </Typography>
           {pages.map((page) => (
                 <MenuItem key={page} sx={{mb:2.5,'&:hover': {
-                  borderRadius: '4px',height:25}}}>
+                  borderRadius: '4px',height:25,background:'#000000'}}}>
                   <Typography variant="h9" textAlign="center" sx={{}}>{page}</Typography>
                 </MenuItem>
               ))}
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="small" aria-label="show 4 new mails" color="inherit" sx={{mb:2.5}}>
-                <AppsOutlinedIcon />
+            <IconButton  size="small" aria-label="show 4 new mails" color={theme.palette.secondary.light} sx={{mb:2.5}}>
+                <AppsOutlinedIcon fontSize='small' />
             </IconButton>
             <IconButton
               size="small"
               aria-label="show 17 new notifications"
-              color="inherit"
+              color={theme.palette.secondary.light}
               sx={{mb:2.5}}
             >
-                <LightModeOutlinedIcon />
+                <LightModeOutlinedIcon fontSize='small' />
               
             </IconButton>
             <IconButton
@@ -104,10 +104,10 @@ export default function Layout({children,role,mode,handleModeChange}) {
               aria-controls={menuId}
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
-              color="inherit"
+              color={theme.palette.secondary.light}
               sx={{mb:2.5}}
             >
-              <PersonOutlineOutlinedIcon />
+              <PersonOutlineOutlinedIcon fontSize='small' />
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
@@ -120,14 +120,14 @@ export default function Layout({children,role,mode,handleModeChange}) {
               color="inherit"
               sx={{mb:2.5}}
             >
-              <MoreIcon />
+              <MoreIcon fontSize='small' />
             </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
     </Grid>
           {children}
-          <Paper sx={{backgroundColor:"#000000",mt:1,minHeight:"29px"}}>
+          <Paper sx={{background: `linear-gradient(135deg,#000000, #1e222d) `,mt:1,minHeight:"29px"}}>
         <Typography>
         this is a footer that displays top gaining stocks or favorites or top losing stocks </Typography></Paper>
 

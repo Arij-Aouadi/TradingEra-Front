@@ -27,28 +27,39 @@ const getDesignTokens = (mode) => ({
           }
         : {
             primary: {
-                main : "#000000",
+                main : "#b2b5be",
                 dark : "#000000",
                 light : "#000000",
-                contrastText : "#e9e9e9",
+                contrastText : "#b2b5be",
             },
             secondary : {
                 dark : "#e60052",
                 main : "#84fffa",
-                light : "#e60052",
-                contrastText: "#2e2e39",
+                light : "#dadada",
+                contrastText: "#434651",
             },
             text :{
-                primary : "#e9e9e9",
-                secondary : "#e9e9e9",
+                primary : "#b2b5be",
+                secondary : "#b2b5be",
                 
             },
             background:{
                 paper : "rgba(0,0,0,0.1)",
                 default :"#000000",
             },
-            action:{
-                
+            typography:{
+                fontFamily: [
+                    '-apple-system',
+                    'BlinkMacSystemFont',
+                    '"Segoe UI"',
+                    'Roboto',
+                    '"Helvetica Neue"',
+                    'Arial',
+                    'sans-serif',
+                    '"Apple Color Emoji"',
+                    '"Segoe UI Emoji"',
+                    '"Segoe UI Symbol"',
+                  ].join(','), 
             },
           }),
     },
