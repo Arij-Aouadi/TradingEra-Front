@@ -59,9 +59,8 @@ function Portefeuille () {
   
     }, []);
   return (
-    <Grid container rowSpacing={3} columnSpacing={1} sx={{ mt: 2, ml: 5,height:'100vh',overflow:'auto'}}>
-      
-      <Grid item xs={6} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+    <Grid container spacing={3} sx={{ mt: 2, ml: 1 }}>
+      <Grid item xs={5.5} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
       <Paper sx={{ minHeight: '10vh', padding: 2 }}>
       <Typography variant="h6">Valeur Totale de portefeuille</Typography>
       <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
@@ -117,9 +116,8 @@ function Portefeuille () {
           />
         </Paper>
       </Grid>
-
-      <Grid item xs={2.5} sx={{}}>
-      <Paper sx={{ minHeight: "45vh", padding: 2 }}>
+      <Grid item xs={3} sx={{}}>
+      <Paper sx={{ minHeight: "28vh", padding: 2 }}>
         <Typography variant="h6" sx={{ borderBottom: '1px solid #ccc', paddingBottom: '8px' }}>Balance</Typography>
         <Box sx={{ display: 'flex', flexDirection: 'column', paddingTop: '8px' }}>
           {balanceData.map((item, index) => (
@@ -136,26 +134,6 @@ function Portefeuille () {
         </Box>
       </Paper>
       </Grid>
-      
-      <Grid item xs={2.5} sx={{}}>
-      <Paper sx={{ minHeight: "45vh", padding: 2 }}>
-        <Typography variant="h6" sx={{ borderBottom: '1px solid #ccc', paddingBottom: '8px' }}>Balance</Typography>
-        <Box sx={{ display: 'flex', flexDirection: 'column', paddingTop: '8px' }}>
-          {balanceData.map((item, index) => (
-            <Box key={index} sx={{ display: 'flex', justifyContent: 'space-between', padding: '4px 0' }}>
-              <Typography variant="body1">{item.label}:</Typography>
-              <Typography variant="body1" sx={{ fontWeight: 'bold' }}>{`${item.value}€`}</Typography>
-            </Box>
-          ))}
-          <Divider sx={{ margin: '8px 0', backgroundColor: '#ccc' }} />
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Typography variant="body1">Total:</Typography>
-            <Typography variant="body1" sx={{ fontWeight: 'bold' }}>{`${totalBalance}€`}</Typography>
-          </Box>
-        </Box>
-      </Paper>
-      </Grid>
-
       <Grid item xs={11} sx={{}}>
       <div style={{ height: 400, width: '100%' }}>
       <DataGrid
@@ -172,4 +150,3 @@ function Portefeuille () {
 }
 
 export default Portefeuille;
-
