@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import {Grid, Paper, ThemeProvider, Typography,Stack } from '@mui/material'
 import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
 import axiosInstance from '../../axios';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { useTheme } from '@emotion/react';
 
 
 
-const Item = styled(Paper)(({ theme }) => ({
+const Item = styled(Button)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? ' rgba(0,0,0,0.3)' : '#fff',
     ...theme.typography.body2,
     padding: theme.spacing(0.5),
@@ -17,57 +16,55 @@ const Item = styled(Paper)(({ theme }) => ({
   }));
 
 const MakeNewOrder = () => {
-  const [appData,setAppData]=useState([])
+  const [openOrders,setOpenOrders]=useState([])
+  const [positions,setPositions]=useState([])
+  const [closedOrders,setClosedOrders]=useState([])
+
+
   useEffect(()=>{
     
-    axiosInstance.get('/Position/showall')
-    .then(res => {setAppData(res.data); })
+    axiosInstance.get('/ordre/showall')
+    .then(res => {setOpenOrders(res.data); })
     .catch(error => {
           console.error( error);
         });
+
+    axiosInstance.get('/Position/showall')
+    .then(res => {setPositions(res.data); })
+    .catch(error => {
+    console.error( error);
+    });    
   }
   ,[]);
+
+
   return (
-    <Grid container spacing={1}>
+    <Grid container spacing={0.5}>
 
         <Grid item xs={12} sx={{ml:1,mt:0.5}}>
         <div>
             <Stack direction="row" spacing={1}>
-            <Item> Saisie Des Ordres </Item>
-            <Item> Mon Portefeuille</Item>
-            <Item> Ordres Ouverts</Item>
+            <Button variant="contained" size='small' sx={{height:'25px',backgroundColor:'#131722',borderRadius:'10px'}} >Ordres Ouverts</Button>
+            <Button variant="contained" size='small' sx={{height:'25px',backgroundColor:'#131722',borderRadius:'10px'}} >Positions</Button>
+            <Button variant="contained" size='small' sx={{height:'25px',backgroundColor:'#131722',borderRadius:'10px'}} >Ordres Fermés</Button>
+            <Button variant="contained" size='small' sx={{height:'25px',backgroundColor:'#131722',borderRadius:'10px'}} >Historique</Button>
+
             </Stack>
         </div>
 
         </Grid>
 
         <Grid item xs={12}>
-            <Paper sx={{backgroundColor: '  rgba(0,0,0,0.3) ',
+            <Paper sx={{background: `linear-gradient(135deg,#000000, #1e222d) `,
              ml:1,mr:1,
-             minHeight:'23vh',
+             minHeight:'30vh',
              display:'flex',
              flexDirection: 'column',
              justifyContent: 'space-between'
         }}>
             <div>
-            <Box
-              component="form"
-              sx={{
-              '& > :not(style)': { m: 1, width: '25ch' },
-              }}
-              noValidate
-              autoComplete="off"
-            >
             
-            </Box>
- 
             </div>
-            <Button variant="outlined" 
-            size='small'
-             color="secondary" 
-             sx={{height:"25px",width:"147px",ml:1,mb:1}}>
-                +Nouveau Ordre
-                </Button>
             </Paper>
         </Grid>
 
