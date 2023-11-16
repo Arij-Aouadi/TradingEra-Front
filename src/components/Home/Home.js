@@ -5,6 +5,7 @@ import TradingViewWidget from '../CandlesChart/CandlesChart'
 import StockList from '../StockList/StockList';
 import MakeNewOrder from '../MakeAnOrder/MakeNewOrder'
 import Ordre from '../Ordre/Ordre';
+import OrderBook from '../OrderBook/OrderBook';
 
 const Home = () => {
   var theme = useTheme();
@@ -13,7 +14,7 @@ const Home = () => {
     <Grid container spacing={1} width="100%" sx={{display:'flex',justifyContent: 'center',mt:0.25}}   >
       
       <Grid item xs={2.5} >
-        <Paper sx={{minHeight:"86svh",background: `linear-gradient(135deg,#000000, #1e222d) `}} >
+        <Paper sx={{minHeight:"86svh",background: `linear-gradient(135deg,#000000, #1e222d)`}} >
         <StockList></StockList>    </Paper>
       </Grid>
 
@@ -26,7 +27,8 @@ const Home = () => {
 
   <Grid item xs={3.5}>
     <Paper sx={{minHeight:"44vh",background: `linear-gradient(135deg,#000000, #1e222d) `}}>
-    <Typography>Order Book here</Typography></Paper>
+      <OrderBook/>
+    </Paper>
   </Grid>
 
   <Grid item xs={8.5} sx={{mt:1}}>
@@ -36,7 +38,11 @@ const Home = () => {
   </Grid>
 
   <Grid item xs={3.5}>
-    <Paper sx={{height:"40vh",background: `linear-gradient(135deg,#000000, #1e222d) `}}>
+    <Paper sx={{height:"40vh",
+                background: `linear-gradient(135deg,#000000, #1e222d) `,
+                display:'flex',
+                justifyContent:'center',
+                alignItems:'center'}}>
         <Ordre></Ordre></Paper>
   </Grid>
 </Grid>  
