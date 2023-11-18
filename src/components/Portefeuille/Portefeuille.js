@@ -44,7 +44,6 @@ const columns = [
   { field: 'variation', headerName: 'Variation', width: 150 },
 ];
 
-
 function Portefeuille () {
   
   const [positions, setPositions] = useState([]);
@@ -59,6 +58,7 @@ function Portefeuille () {
   
     }, []);
   return (
+    
     <Grid container spacing={3} sx={{ mt: 2, ml: 1 }}>
       <Grid item xs={5.5} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
       <Paper sx={{ minHeight: '10vh', padding: 2 }}>
@@ -146,6 +146,7 @@ function Portefeuille () {
       </Grid>
       <Grid item xs={12}></Grid>
     </Grid>
+    
   );
 }
 

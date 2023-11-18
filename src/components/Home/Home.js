@@ -36,7 +36,13 @@ const Home = () => {
   </Grid>
 
   <Grid item xs={3.5}>
-    <Paper sx={{height:"40vh",background: `linear-gradient(135deg,#000000, #1e222d) `}}>
+    <Paper sx={{height:"40vh",
+                background: `linear-gradient(135deg,#000000, #1e222d) `,
+                display:'flex',
+               justifyContent:'center',
+               alignItems:'center'
+  
+        }}>
         <Ordre></Ordre></Paper>
   </Grid>
 </Grid>  
