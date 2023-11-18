@@ -19,7 +19,7 @@ import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 
 
 //AppBar
-const pages = ['Trade', 'Analyser', 'Portefeuille','Revenue','Historique'];
+const pages = ['Trade', 'Options', 'Portefeuille','Trading 101','Historique'];
 
 
 
