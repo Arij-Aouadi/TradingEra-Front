@@ -6,15 +6,23 @@ import StockList from '../StockList/StockList';
 import MakeNewOrder from '../MakeAnOrder/MakeNewOrder'
 import Ordre from '../Ordre/Ordre';
 import OrderBook from '../OrderBook/OrderBook';
+import { motion } from 'framer-motion';
 
 const Home = () => {
   var theme = useTheme();
+
+
   return (
-    <ThemeProvider theme={theme}>
+    <motion.div
+    initial={{ opacity: 0, scale: 0.1 }}
+    animate={{ opacity: 1, scale: 1 }}
+    exit={{ x: "-100vh",
+    transition: { ease: 'easeInOut' }}}
+    >
     <Grid container spacing={1} width="100%" sx={{display:'flex',justifyContent: 'center',mt:0.25}}   >
       
       <Grid item xs={2.5} >
-        <Paper sx={{minHeight:"86svh",background: `linear-gradient(135deg,#000000, #1e222d)`}} >
+        <Paper sx={{minHeight:"87svh",background: `linear-gradient(135deg,#000000, #1e222d)`}} >
         <StockList></StockList>    </Paper>
       </Grid>
 
@@ -26,7 +34,7 @@ const Home = () => {
   </Grid>
 
   <Grid item xs={3.5}>
-    <Paper sx={{minHeight:"44vh",background: `linear-gradient(135deg,#000000, #1e222d) `}}>
+    <Paper sx={{minHeight:"44vh",background: `linear-gradient(135deg,#000000, #1e222d) `,display:'flex',justifyContent:'center',alignItems:'center'}}>
       <OrderBook/>
     </Paper>
   </Grid>
@@ -38,7 +46,7 @@ const Home = () => {
   </Grid>
 
   <Grid item xs={3.5}>
-    <Paper sx={{height:"40vh",
+    <Paper sx={{height:"41vh",
                 background: `linear-gradient(135deg,#000000, #1e222d) `,
                 display:'flex',
                 justifyContent:'center',
@@ -47,7 +55,7 @@ const Home = () => {
   </Grid>
 </Grid>  
 
-    </Grid></ThemeProvider>
+    </Grid></motion.div>
   )
 }
 

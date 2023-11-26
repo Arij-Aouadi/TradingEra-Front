@@ -2,6 +2,7 @@ import LoginForm from "./components/signin/signin";
 import Register from "./pages/Register";
 import Home from "./components/Home/Home";
 import Portefeuille from "./components/Portefeuille/Portefeuille";
+import WelcomePage from "./components/WelcomePage/WelcomePage";
 
 const AppRoutes = [
   {
@@ -13,7 +14,7 @@ const AppRoutes = [
     element: <Portefeuille />
   },
   {
-      path: '/home',
+      path: '/Jouer',
       element: <Home />
   },
   {
@@ -31,7 +32,11 @@ const AppRoutes = [
   {
     path: '/stockes',
     element: <Home/>
-  }
+  },
+  {
+    path: '/welcome',
+    element: <WelcomePage/>
+  },
 
 ];
 

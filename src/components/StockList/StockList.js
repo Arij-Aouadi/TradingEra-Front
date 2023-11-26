@@ -10,6 +10,7 @@ import ImageIcon from '@mui/icons-material/Image';
 import WorkIcon from '@mui/icons-material/Work';
 import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 import { FaMicrosoft, FaAmazon, FaFacebook,FaTwitter,FaAndroid,FaInstagram,FaAirbnb,FaSnapchat, FaUber, FaPaypal,FaEtsy ,FaSquare} from 'react-icons/fa';
+import { Grid, Typography } from '@mui/material';
 
 
 
@@ -70,7 +71,7 @@ function StockList() {
   };
 
   return (
-    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+    <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
         {stocks.map((stock) => (
           <ListItem key={stock.idA}>
             <ListItemAvatar>
@@ -78,7 +79,11 @@ function StockList() {
           {getIconForCompany(stock.name)}
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary={stock.symbole} secondary={stock.coursActuel+" , "+ "+"+stock.variationEnPorcentage+"%" } />
+        <Grid container sx={{width:"100%"}} >
+          <Grid item xs={8}><Typography sx={{fontFamily:'Orbitron'}}>{stock.symbole}</Typography></Grid>
+          <Grid item xs={2}><Typography sx={{fontFamily:'Orbitron',fontSize:'13.5px'}}>{stock.coursActuel}</Typography></Grid>
+          <Grid item xs={12} spacing={1} display="flex" justifyContent="flex-end"><Typography sx={{fontFamily:'Orbitron',fontSize:'11px',color:stock.variationEnPorcentage>=0? "#f72585":"#4CC9F0"}}>{stock.variationEnPorcentage} %</Typography></Grid>
+        </Grid>
           </ListItem>
         ))}
     </List>
