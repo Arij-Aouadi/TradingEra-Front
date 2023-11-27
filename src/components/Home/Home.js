@@ -1,5 +1,5 @@
 import React from 'react'
-import {Grid, Paper, ThemeProvider, Typography } from '@mui/material'
+import {Grid, Paper, ThemeProvider} from '@mui/material'
 import { useTheme } from '@emotion/react'
 import TradingViewWidget from '../CandlesChart/CandlesChart'
 import StockList from '../StockList/StockList';

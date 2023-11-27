@@ -15,6 +15,7 @@ import { Grid } from '@mui/material';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
+import CustomSelect from '../Footer/Footer'
 
 
 
@@ -128,8 +129,8 @@ export default function Layout({children,role,mode,handleModeChange}) {
     </Grid>
           {children}
           <Paper sx={{background: `linear-gradient(135deg,#000000, #1e222d) `,mt:1,minHeight:"29px"}}>
-        <Typography>
-        this is a footer that displays top gaining stocks or favorites or top losing stocks </Typography></Paper>
+        
+      <CustomSelect> </CustomSelect>  </Paper>
 
         </Box>
         

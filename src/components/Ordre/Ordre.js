@@ -32,7 +32,7 @@ const Ordre = () => {
         <Grid item xs={12} sx={{display:'flex',justifyContent:'space-evenly'}}>
         <AwesomeButton type="primary" className="aws-btn">Sell</AwesomeButton>
         <AwesomeButton type="secondary" className="aws-btn">Buy</AwesomeButton>
-        </Grid>
+        </Grid> 
 
         <Grid item xs={12} sx={{display:'flex',justifyContent:'space-between'}}>
 
