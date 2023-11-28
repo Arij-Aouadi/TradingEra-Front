@@ -2,7 +2,7 @@ import LoginForm from "./components/signin/signin";
 import Register from "./pages/Register";
 import Home from "./components/Home/Home";
 import Portefeuille from "./components/Portefeuille/Portefeuille";
-
+import ChatBot from "./components/ChatBot/ChatBot"
 const AppRoutes = [
   {
     index: true,
@@ -11,6 +11,10 @@ const AppRoutes = [
   {
     path: '/Portefeuille',
     element: <Portefeuille />
+  },
+  {
+    path: '/ChatBot',
+    element: <ChatBot />
   },
   {
       path: '/home',
