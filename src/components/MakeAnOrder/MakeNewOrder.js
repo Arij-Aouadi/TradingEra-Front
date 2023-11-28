@@ -64,7 +64,7 @@ const MakeNewOrder = () => {
         <Grid item xs={12}>
             <Paper sx={{background: `linear-gradient(135deg,#000000, #1e222d) `,
              ml:1,mr:1,mt:1,mb:1,
-             minHeight:'30vh',
+             minHeight:'23vh',
              display:'flex',
              flexDirection: 'column',
              justifyContent: 'space-between'

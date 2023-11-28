@@ -54,7 +54,10 @@ const OrderBook = () => {
         <Paper sx={{background: `linear-gradient(135deg,#000000, #1e222d)`,
         minHeight:'3vh',
         display:'flex',
-        justifyContent:'center'
+        justifyContent:'center',
+        fontFamily:'Orbitron',
+        fontSize:'13.5px'
+       
         }}>
             <span>Cours Actuel 214.56 - +3%</span>
         </Paper>

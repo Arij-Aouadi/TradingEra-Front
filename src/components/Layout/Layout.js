@@ -15,13 +15,14 @@ import { Grid } from '@mui/material';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
+import CustomSelect from '../Footer/Footer'
 import { Link } from 'react-router-dom';
 
 
 
 
 //AppBar
-const pages = ['Jouer', 'Options', 'Portefeuille','Apprendre','Historique'];
+const pages = ['Jouer', 'Options', 'Portefeuille','Apprendre','Historique','Competition'];
 
 
 
@@ -46,7 +47,12 @@ export default function Layout({children,role,mode,handleModeChange}) {
  
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ display: 'flex',minHeight:"100vh" }}>
+
+      <Box sx={{ display: 'flex',height:"100vh",
+    overflow:1,scrollbarWidth: 'none',
+    '&::-webkit-scrollbar': {
+        width: '0',
+      } }}>
           
 
         <Box
@@ -57,10 +63,14 @@ export default function Layout({children,role,mode,handleModeChange}) {
                 ? "#000000"
                 : "#000000",
             flexGrow: 1,
-            height: '100vh',
-            overflow: 'hidden'
+            height: '100%',
+    overflow:1,scrollbarWidth: 'none',
+    '&::-webkit-scrollbar': {
+        width: '0',
+      }
           }}
           >
+
             <Grid container sx={{ flexGrow: 1,height:'40px'}} >
 
       <AppBar position="static" sx={{height:'40px',background: `linear-gradient(135deg,#000000, #1e222d) `}}>
@@ -125,12 +135,14 @@ export default function Layout({children,role,mode,handleModeChange}) {
           </Box>
         </Toolbar>
       </AppBar>
-    </Grid>
+            </Grid>
+          <div style={{
+    overflow:1,scrollbarWidth: 'none',
+    '&::-webkit-scrollbar': {
+        width: '0',
+      }}}>
           {children}
-          <Paper sx={{background: `linear-gradient(135deg,#000000, #1e222d) `,mt:1,minHeight:"29px"}}>
-        <Typography>
-        this is a footer that displays top gaining stocks or favorites or top losing stocks </Typography></Paper>
-
+          </div>
         </Box>
         
         

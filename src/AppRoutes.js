@@ -3,6 +3,7 @@ import Register from "./pages/Register";
 import Home from "./components/Home/Home";
 import Portefeuille from "./components/Portefeuille/Portefeuille";
 import WelcomePage from "./components/WelcomePage/WelcomePage";
+import TradingGame from "./components/TradingGame/TradingGame";
 
 const AppRoutes = [
   {
@@ -37,7 +38,10 @@ const AppRoutes = [
     path: '/welcome',
     element: <WelcomePage/>
   },
-
+  {
+    path: '/Competition',
+    element: <TradingGame/>
+  },
 ];
 
 export default AppRoutes;
