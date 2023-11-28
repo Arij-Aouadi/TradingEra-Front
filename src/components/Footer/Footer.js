@@ -14,7 +14,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import Grid from '@mui/material/Grid';
 
 const CustomSelect = () => {
-  const [selectedOption, setSelectedOption] = React.useState('');
+  const [selectedOption, setSelectedOption] = React.useState('top-gaining');
 
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
@@ -41,7 +41,7 @@ const CustomSelect = () => {
 
   return (
     <div>
-      <FormControl variant="standard" sx={{ m:2, minWidth: 250, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+      <FormControl variant="standard" sx={{display: 'flex', flexDirection: 'row', alignItems: 'center',fontFamily:'Orbitron',fontSize:'12px' }}>
         <Select
           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
@@ -52,7 +52,7 @@ const CustomSelect = () => {
               <Grid container alignItems="center" spacing={1}>
                 <Grid item>{getIcon(value)}</Grid>
                 <Grid item>
-                  <Typography fontWeight="bold">
+                  <Typography sx={{fontFamily:'Orbitron',fontSize:'12px'}} fontWeight="bold">
                     {value === '' ? 'None' : value}
                   </Typography>
                 </Grid>
@@ -75,9 +75,9 @@ const CustomSelect = () => {
         {selectedOption && (
           <List sx={{ display: 'flex', flexDirection: 'row', padding: 0, marginLeft: '16px' }}>
             {/* Ajoutez les éléments de la liste horizontale ici */}
-            <ListItem>Item 1</ListItem>
-            <ListItem>Item 2</ListItem>
-            <ListItem>Item 3</ListItem>
+            <ListItem sx={{minWidth:100}}>Item 1</ListItem>
+            <ListItem sx={{minWidth:100}}>Item 2</ListItem>
+            <ListItem sx={{minWidth:100}}>Item 3</ListItem>
           </List>
         )}
       </FormControl>

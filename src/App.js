@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import AppRoutes from './AppRoutes';
 import './custom.css';
 import Layout from './components/Layout/Layout';
@@ -9,9 +9,12 @@ import { useState } from 'react';
 import { ThemeProvider } from '@emotion/react';
 import getDesignTokens from './getDesignTokens';
 import { createTheme } from '@mui/material/styles';
+import { AnimatePresence, motion } from "framer-motion";
+
 
 const App = () => {
   const [mode, setMode] = useState('dark');
+  const location = useLocation();
   
   const handleModeChange = (newMode) => {
     setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
@@ -25,7 +28,9 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Routes>
+      <AnimatePresence >
+      <Routes location={location} key={location.key}>
+
         {AppRoutes.map((route, index) => {
           const { element, ...rest } = route;
           if (route.index === true) {
@@ -39,6 +44,7 @@ const App = () => {
           }
         })}
       </Routes>
+      </AnimatePresence>
     </ThemeProvider>
   );
 };
