@@ -2,7 +2,9 @@ import LoginForm from "./components/signin/signin";
 import Register from "./pages/Register";
 import Home from "./components/Home/Home";
 import Portefeuille from "./components/Portefeuille/Portefeuille";
-import ChatBot from "./components/ChatBot/ChatBot"
+import WelcomePage from "./components/WelcomePage/WelcomePage";
+import TradingGame from "./components/TradingGame/TradingGame";
+
 const AppRoutes = [
   {
     index: true,
@@ -13,11 +15,7 @@ const AppRoutes = [
     element: <Portefeuille />
   },
   {
-    path: '/ChatBot',
-    element: <ChatBot />
-  },
-  {
-      path: '/home',
+      path: '/Jouer',
       element: <Home />
   },
   {
@@ -35,8 +33,15 @@ const AppRoutes = [
   {
     path: '/stockes',
     element: <Home/>
-  }
-
+  },
+  {
+    path: '/welcome',
+    element: <WelcomePage/>
+  },
+  {
+    path: '/Competition',
+    element: <TradingGame/>
+  },
 ];
 
 export default AppRoutes;

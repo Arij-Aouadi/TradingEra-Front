@@ -27,13 +27,19 @@ function createData(prix, volume) {
   
 const OrderBook = () => {
   return (
-    <Grid container direction="column" >
-    <Grid item xs={12} >
-        <Paper sx={{minHeight:'20vh'}}>
+    <Grid container sx={{display:'flex',justifyContent:'center',alignItems:'center'}}>
+
+    <Grid item xs={12} sx={{minWidth:'100%',minHeight:'45%',display:'flex',justifyContent:'center',alignItems:'flex-end'}} >
+        <Paper sx={{minWidth:'100%',minHeight:'100%',background: `linear-gradient(135deg,#000000, #1e222d)`}}>
         {sellers.map((seller)=>{ return(
-            <Paper sx={{ml:1,mr:1,display:'flex',
+            <Paper sx={{
+              ml:1,
+              mr:1,
+              display:'flex',
             justifyContent:'space-between',
-            background:`linear-gradient(90deg, transparent ${100-seller.volume}% , #a42630 ${seller.volume}%)`}}>
+            background:`linear-gradient(90deg,transparent ${100-seller.volume}% ,#590d2e ${seller.volume}%)`,
+             fontFamily:'Orbitron',
+             fontSize:'13.5px'}}>
             <div>
             {seller.prix}
             </div>
@@ -44,23 +50,28 @@ const OrderBook = () => {
         </Paper>
     </Grid>
 
-    <Grid item xs={12} >
+    <Grid item xs={12} sx={{minWidth:'100%',minHeight:'10%'}} >
         <Paper sx={{background: `linear-gradient(135deg,#000000, #1e222d)`,
         minHeight:'3vh',
         display:'flex',
-        justifyContent:'center'
+        justifyContent:'center',
+        fontFamily:'Orbitron',
+        fontSize:'13.5px'
+       
         }}>
             <span>Cours Actuel 214.56 - +3%</span>
         </Paper>
 
     </Grid>
 
-    <Grid item xs={12}  >
-    <Paper sx={{minHeight:'20vh'}}>
+    <Grid item xs={12}  sx={{minWidth:'100%',minHeight:'45%',display:'flex',justifyContent:'center',alignItems:'flex-start'}} >
+    <Paper sx={{minWidth:'100%',minHeight:'100%',background: `linear-gradient(135deg,#000000, #1e222d)`}}>
     {buyers.map((buyer)=>{ return(
             <Paper sx={{ml:1,mr:1,display:'flex',
             justifyContent:'space-between',
-            background:`linear-gradient(90deg, transparent ${100-buyer.volume}% , #066656 ${buyer.volume}%)`
+            background:`linear-gradient(90deg, transparent ${100-buyer.volume}% , #133039 ${buyer.volume}%)`,
+            fontFamily:'Orbitron',
+            fontSize:'13.5px'
             }}>
             <div>
             {buyer.prix}

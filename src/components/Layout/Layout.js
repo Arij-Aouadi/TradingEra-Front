@@ -15,11 +15,16 @@ import { Grid } from '@mui/material';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
+import CustomSelect from '../Footer/Footer'
+import { Link } from 'react-router-dom';
+
+
+
 
 
 
 //AppBar
-const pages = ['Trade', 'Options', 'Portefeuille','Trading 101','Historique'];
+const pages = ['Jouer', 'Options', 'Portefeuille','Apprendre','Historique','Competition'];
 
 
 
@@ -40,12 +45,16 @@ export default function Layout({children,role,mode,handleModeChange}) {
 
   const menuId = 'primary-search-account-menu';
  
-  const mobileMenuId = 'primary-search-account-menu-mobile';
- 
+  const mobileMenuId = 'primary-search-account-menu-mobile'; 
  
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ display: 'flex',minHeight:"100vh" }}>
+
+      <Box sx={{ display: 'flex',height:"100vh",
+    overflow:1,scrollbarWidth: 'none',
+    '&::-webkit-scrollbar': {
+        width: '0',
+      } }}>
           
 
         <Box
@@ -56,30 +65,33 @@ export default function Layout({children,role,mode,handleModeChange}) {
                 ? "#000000"
                 : "#000000",
             flexGrow: 1,
-            height: '100vh',
-            overflow: 'hidden'
+            height: '100%',
+    overflow:1,scrollbarWidth: 'none',
+    '&::-webkit-scrollbar': {
+        width: '0',
+      }
           }}
           >
+
             <Grid container sx={{ flexGrow: 1,height:'40px'}} >
 
       <AppBar position="static" sx={{height:'40px',background: `linear-gradient(135deg,#000000, #1e222d) `}}>
         <Toolbar sx={{height:'40px'}} >
 
-        <Box href="/" sx={{display: 'inline-flex',height: 32,width: 32,mb:2}}>
-                        <img src={logo} alt="Logo" sx={{width:'20px',height: 'auto'}}/>
-          </Box>
           <Typography
             variant="h5"
             noWrap
             component="div"
-            sx={{ display: { xs: 'none', sm: 'block' },mb:2,mr:5 }}
+            sx={{ display: { xs: 'none', sm: 'block' },mb:3,mr:5,fontFamily:'Orbitron',textShadow: "0px 0px 5px rgb(255,255,255)",color:"white"
+          }}
           >
-            Trading Era
+            TradingEra
           </Typography>
           {pages.map((page) => (
-                <MenuItem key={page} sx={{mb:2.5,'&:hover': {
-                  borderRadius: '4px',height:25,background:'#000000'}}}>
-                  <Typography variant="h9" textAlign="center" sx={{}}>{page}</Typography>
+
+                <MenuItem key={page} component={Link} to={`/${page}`} sx={{textDecoration: 'none', color: 'inherit',mb:2.5,'&:hover': {
+                  borderRadius: '4px',height:25,background:'#000000',color:'white'}}}>
+                  <Typography variant="h9" textAlign="center" sx={{fontFamily:'Orbitron'}}>{page}</Typography>
                 </MenuItem>
               ))}
 
@@ -125,17 +137,20 @@ export default function Layout({children,role,mode,handleModeChange}) {
           </Box>
         </Toolbar>
       </AppBar>
-    </Grid>
+            </Grid>
+          <div style={{
+    overflow:1,scrollbarWidth: 'none',
+    '&::-webkit-scrollbar': {
+        width: '0',
+      }}}>
           {children}
-          <Paper sx={{background: `linear-gradient(135deg,#000000, #1e222d) `,mt:1,minHeight:"29px"}}>
-        <Typography>
-        this is a footer that displays top gaining stocks or favorites or top losing stocks </Typography></Paper>
-
+          </div>
         </Box>
         
         
       </Box>
       
     </ThemeProvider>
+
   );
 }
