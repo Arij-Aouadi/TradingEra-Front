@@ -17,6 +17,7 @@ import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 import CustomSelect from '../Footer/Footer'
 import { Link } from 'react-router-dom';
+import Niveau from '../Niveau/Niveau';
 
 
 
@@ -44,6 +45,7 @@ export default function Layout({children,role,mode,handleModeChange}) {
   const menuId = 'primary-search-account-menu';
  
   const mobileMenuId = 'primary-search-account-menu-mobile'; 
+  
  
   return (
     <ThemeProvider theme={theme}>
@@ -87,13 +89,19 @@ export default function Layout({children,role,mode,handleModeChange}) {
           </Typography>
           {pages.map((page) => (
 
-                <MenuItem key={page} component={Link} to={`/${page}`} sx={{textDecoration: 'none', color: 'inherit',mb:2.5,'&:hover': {
-                  borderRadius: '4px',height:25,background:'#000000',color:'white'}}}>
+                <MenuItem key={page} component={Link} to={`/${page}`} sx={{fontSize:'13px',textDecoration: 'none', color: 'inherit',mb:2.5,'&:hover': {
+                  borderRadius: '4px',height:25,textShadow: "0px 0px 5px rgb(255,255,255)"
+                  ,color:'white'}}}>
                   <Typography variant="h9" textAlign="center" sx={{fontFamily:'Orbitron'}}>{page}</Typography>
                 </MenuItem>
               ))}
 
           <Box sx={{ flexGrow: 1 }} />
+
+          <Box sx={{mb:2.5,mr:0.5 }}>
+            <Niveau></Niveau>
+            </Box>
+
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton  size="small" aria-label="show 4 new mails" color={theme.palette.secondary.light} sx={{mb:2.5}}>
                 <AppsOutlinedIcon fontSize='small' />
@@ -133,10 +141,10 @@ export default function Layout({children,role,mode,handleModeChange}) {
               <MoreIcon fontSize='small' />
             </IconButton>
           </Box>
-        </Toolbar>
+                  </Toolbar>
       </AppBar>
             </Grid>
-          <div style={{
+          <div style={{Width:'100%',
     overflow:1,scrollbarWidth: 'none',
     '&::-webkit-scrollbar': {
         width: '0',

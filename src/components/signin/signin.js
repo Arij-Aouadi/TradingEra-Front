@@ -102,12 +102,18 @@ function LoginForm({mode,handleModeChange}) {
                 localStorage.setItem('isAuthenticated', true);
                 localStorage.setItem('userId',res.data.id);
                 localStorage.setItem('userRole',res.data.roles[0]);
-                //localStorage.setItem('first_letter',res.data.email[0])
-                setSuccess(true)
+              
+                axiosInstance.get('/NiveauUser',{
+                    headers: {
+                     Authorization : `Bearer ${localStorage.getItem('access_token')}`,
+                    },
+                 }).then(response=>localStorage.setItem('niveau',response.data)).catch(error=>console.log(error))                //localStorage.setItem('first_letter',res.data.email[0])
+               
+                 setSuccess(true)
                 if(res.data.roles[0] == "CLIENT"){
                     axiosInstance.defaults.headers['Authorization'] =
                     'JWT ' + localStorage.getItem('access_token');
-                    window.location.href = '/Home'; 
+                    window.location.href = '/welcome'; 
                 }
                 else{
                     axiosInstance.defaults.headers['Authorization'] =

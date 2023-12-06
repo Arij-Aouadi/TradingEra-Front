@@ -10,6 +10,7 @@ import { ThemeProvider } from '@emotion/react';
 import getDesignTokens from './getDesignTokens';
 import { createTheme } from '@mui/material/styles';
 import { AnimatePresence, motion } from "framer-motion";
+import WelcomePage from './components/WelcomePage/WelcomePage';
 
 
 const App = () => {
@@ -38,7 +39,11 @@ const App = () => {
           }
           if (route.path === '/register') {
             return <Route key={index} path="/register" element={<Register />} />;
-          } else {
+          } 
+          if (route.path === '/welcome') {
+            return <Route key={index} path="/welcome" element={<WelcomePage />} />;
+          }
+          else {
             var userRole = "employee";
             return <Route key={index} {...rest} element={<Layout role={userRole} mode={mode} handleModeChange={handleModeChange} children={element} />} />;
           }
