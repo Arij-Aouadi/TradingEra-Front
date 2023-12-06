@@ -4,6 +4,8 @@ import Home from "./components/Home/Home";
 import Portefeuille from "./components/Portefeuille/Portefeuille";
 import WelcomePage from "./components/WelcomePage/WelcomePage";
 import TradingGame from "./components/TradingGame/TradingGame";
+import Niveau from "./components/Niveau/Niveau";
+import Confetti from "./components/Confetti/Confetti";
 
 const AppRoutes = [
   {
@@ -41,6 +43,14 @@ const AppRoutes = [
   {
     path: '/Competition',
     element: <TradingGame/>
+  },
+  {
+    path: '/Star',
+    element: <Niveau/>
+  },
+  {
+    path: '/Confetti',
+    element: <Confetti/>
   },
 ];
 

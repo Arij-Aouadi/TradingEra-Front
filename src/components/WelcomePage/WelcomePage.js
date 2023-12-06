@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../axios";
+import axios from "axios";
 
 
 
@@ -49,7 +51,7 @@ const WelcomePage = () => {
           return 0;
 
         }
-        const diff = Math.random() * 3;
+        const diff = Math.random() * 10;
         return Math.min(oldProgress + diff, 100);
       });
     }, 500);
@@ -61,7 +63,10 @@ const WelcomePage = () => {
 
     useEffect(()=>{
       if (loading===true){
-      navigate('/Jouer')}
+      axios.post('http://localhost:5000/control_simulation',
+      {"order":"start"}).then(res=>console.log(res.data)).catch(err=>console.log(err))
+      navigate('/Jouer')
+    }
     },[loading])
 
   useEffect(() => {

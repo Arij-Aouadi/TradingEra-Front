@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Grid, Paper, ThemeProvider} from '@mui/material'
 import { useTheme } from '@emotion/react'
 import TradingViewWidget from '../CandlesChart/CandlesChart'
@@ -8,9 +8,17 @@ import Ordre from '../Ordre/Ordre';
 import OrderBook from '../OrderBook/OrderBook';
 import { motion } from 'framer-motion';
 import CustomSelect from '../Footer/Footer'
+import SchoolPride from '../Confetti/SchoolPride';
 
 const Home = () => {
   var theme = useTheme();
+  const [confetti,setConfetti]=useState(false);
+  const textAnimationVariants = {
+    initial: { opacity: 1,},
+    animate: { opacity: 0,},
+    exit: { opacity: 0, },
+  };
+
 
 
   return (
@@ -74,7 +82,42 @@ const Home = () => {
           <CustomSelect> </CustomSelect>  </Paper>
       </Grid>
 
-    </Grid></motion.div>
+    </Grid>
+    <motion.div
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={textAnimationVariants}
+          transition={{ delay: 1 , duration: 1.6 }}
+          style={{
+            minWidth:'40%',
+            minHeight:'35%',
+            position: 'fixed',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 1000, // Make sure it's above other components
+            textAlign: 'center',
+            fontSize: '9rem',
+            color: '#ffffff', // Change color as needed
+            fontFamily: 'Orbitron',
+            borderRadius: '40px',
+            background:`linear-gradient(135deg,#000000, #1e222d)`,
+            textShadow: "0px 0px 5px rgb(255,255,255)"
+          }}
+        >
+          Day 1
+        </motion.div>
+        <motion.div
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        variants={textAnimationVariants}
+        transition={{ delay: 1 , duration: 1.6 }}>
+        <SchoolPride control={false}></SchoolPride>
+        </motion.div>
+    
+    </motion.div>
   )
 }
 

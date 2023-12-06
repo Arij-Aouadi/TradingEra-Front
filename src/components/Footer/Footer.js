@@ -75,9 +75,9 @@ const CustomSelect = () => {
         {selectedOption && (
           <List sx={{ display: 'flex', flexDirection: 'row', padding: 0, marginLeft: '16px' }}>
             {/* Ajoutez les éléments de la liste horizontale ici */}
-            <ListItem sx={{minWidth:100}}>Item 1</ListItem>
-            <ListItem sx={{minWidth:100}}>Item 2</ListItem>
-            <ListItem sx={{minWidth:100}}>Item 3</ListItem>
+            <ListItem sx={{minWidth:120}}>GOOGL <span style={{color:"#F72585"}}> 6.5%</span></ListItem>
+            <ListItem sx={{minWidth:120}}>AAPL <span style={{color:"#F72585"}}>5.6%</span></ListItem>
+            <ListItem sx={{minWidth:120}}>MSFT <span style={{color:"#F72585"}}>3.5%</span></ListItem>
           </List>
         )}
       </FormControl>
