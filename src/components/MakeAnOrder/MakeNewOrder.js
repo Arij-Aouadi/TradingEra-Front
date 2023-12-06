@@ -51,10 +51,10 @@ const MakeNewOrder = () => {
         <Grid item xs={12} sx={{ml:1,mt:0.5}}>
         <div>
             <Stack direction="row" spacing={1}>
-            <Button variant="contained" size='small' onClick={handleShowOpenOrders} sx={{height:'25px',backgroundColor:'#131722',borderRadius:'10px',fontFamily:'Orbitron'}} >Ordres Ouverts</Button>
-            <Button variant="contained" size='small' onClick={handleShowPositions} sx={{height:'25px',backgroundColor:'#131722',borderRadius:'10px',fontFamily:'Orbitron'}} >Positions</Button>
-            <Button variant="contained" size='small' onClick={handleShowClosedOrders} sx={{height:'25px',backgroundColor:'#131722',borderRadius:'10px',fontFamily:'Orbitron'}} >Ordres Fermés</Button>
-            <Button variant="contained" size='small' sx={{height:'25px',backgroundColor:'#131722',borderRadius:'10px',fontFamily:'Orbitron'}} >Historique</Button>
+            <Button variant="contained" size='small' onClick={handleShowOpenOrders} sx={{height:'25px',backgroundColor:'#131722',borderRadius:'10px',fontFamily:'Orbitron',fontSize:'12px'}} >Ordres Ouverts</Button>
+            <Button variant="contained" size='small' onClick={handleShowPositions} sx={{height:'25px',backgroundColor:'#131722',borderRadius:'10px',fontFamily:'Orbitron',fontSize:'12px'}} >Positions</Button>
+            <Button variant="contained" size='small' onClick={handleShowClosedOrders} sx={{height:'25px',backgroundColor:'#131722',borderRadius:'10px',fontFamily:'Orbitron',fontSize:'12px'}} >Ordres Fermés</Button>
+            <Button variant="contained" size='small' sx={{height:'25px',backgroundColor:'#131722',borderRadius:'10px',fontFamily:'Orbitron',fontSize:'12px'}} >Historique</Button>
 
             </Stack>
         </div>
