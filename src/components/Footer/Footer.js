@@ -12,9 +12,108 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import NewReleasesIcon from '@mui/icons-material/NewReleases';
 import SettingsIcon from '@mui/icons-material/Settings';
 import Grid from '@mui/material/Grid';
+import ChatIcon from '@mui/icons-material/Chat'; 
+import { Button, IconButton, InputBase, Paper, TextField } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import axiosInstance from '../../axios';
+import { FaPaperPlane } from 'react-icons/fa';
+import { FiMessageSquare } from 'react-icons/fi';
+import { FaRobot } from 'react-icons/fa';
+
+
+
+
+const ChatInterface = ({ onClose }) => {
+  const [question, setQuestion] = React.useState('');
+  const [messages, setMessages] = React.useState([]);
+
+  const addMessage = async () => {
+    try {
+      const newMessages = [...messages, { user: 'Vous', text: question }];
+      setMessages(newMessages);
+
+      const response = await axiosInstance.get(`/admin/livechat/${encodeURIComponent(question)}`);
+      
+      const botMessage = { user: 'ChatBot', text: response.data };
+      setMessages([...newMessages, botMessage]);
+
+      setQuestion('');
+    } catch (error) {
+      console.error('Error asking AI:', error.message);
+    }
+  };
+  
+  return (
+  <Paper elevation={15} style={{ 
+      padding: '20px',
+      maxWidth: '400px',
+      maxHeight: '500px',
+      position: 'fixed', 
+      bottom: '10px', 
+      right: '10px', 
+      backgroundColor: '#fff',
+      zIndex: 9999, 
+      overflow:'scroll',scrollbarWidth: 'none',
+      borderRadius: '20px', // Ajout de la bordure
+      boxShadow: '0 0 12px rgba(0,0,0,.15)', // Ajout de la boîte d'ombre
+      
+    }}>
+     <div style={{ display: 'flex', flexDirection: 'column', position: 'relative', color: 'rgb(88, 65, 216)' }}>
+      <div style={{ marginBottom: '20px', paddingBottom: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderRadius: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <FiMessageSquare style={{ fontSize: '30px', marginRight: '10px', color: 'blue', animation: 'bounce 1s infinite' }} />
+
+          <div>
+            <Typography variant="h5" style={{ fontWeight: 'bold', color: '#000' }}>TradingEra</Typography>
+            <Typography variant="subtitle1" style={{ color: '#888', fontWeight: 'bold' }}>Live Chat</Typography>
+          </div>
+        </div>
+        <IconButton onClick={onClose} size="small" style={{ color: '#000' }}>
+          <CloseIcon />
+        </IconButton>
+      </div>
+        
+      <div style={{ marginBottom: '10px'}}>
+  {messages.map((message, index) => (
+    <div
+      key={index}
+      style={{
+        marginBottom: '10px',
+        backgroundColor: message.user === 'Vous' ? 'rgb(88, 65, 216)' : '#f4f6f8',
+        color: message.user === 'Vous' ? 'rgb(255, 255, 255)' : '#000',
+        padding: '20px',
+        fontSize: '17px',
+        borderRadius: '25px',
+        fontWeight: message.user === 'Vous' ? 'bold' : 'normal',
+      }}
+    >
+       {message.user !== 'Vous' && (
+         <FaRobot style={{ fontSize: '20px', marginRight: '10px', color: 'orange', animation: 'spin 2s linear infinite' }} />
+         )}
+      <span>
+        <strong>{message.user}:</strong> {message.text}
+      </span>
+    </div>
+  ))}
+</div>
+        
+      <div style={{ display: 'flex', alignItems: 'center', backgroundColor: '#fff', borderRadius: '100px', padding: '5px' }}>
+        <TextField id="outlined-basic" variant="outlined" style={{ flex: 1 }}InputProps={{type: "text",value: question, onChange: (e) => setQuestion(e.target.value),style: {fontSize: '20px',padding: '8px', borderRadius: '40px',color: '#000', },placeholder: "Type your message...",}}/>
+             <Button variant="contained"color="primary"onClick={addMessage} style={{ padding: '8px', borderRadius: '40px', color: '#fff' }}>
+               Envoyer
+             </Button>
+            </div>
+         </div>
+    </Paper>
+  );
+};
+  
+
 
 const CustomSelect = () => {
   const [selectedOption, setSelectedOption] = React.useState('top-gaining');
+  const [showChatInterface, setShowChatInterface] = React.useState(false);
+
 
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
@@ -37,6 +136,10 @@ const CustomSelect = () => {
       default:
         return null;
     }
+
+  };
+  const toggleChatInterface = () => {
+    setShowChatInterface(!showChatInterface);
   };
 
   return (
@@ -80,9 +183,17 @@ const CustomSelect = () => {
             <ListItem sx={{minWidth:100}}>Item 3</ListItem>
           </List>
         )}
+      
+      <Button variant="outlined" size="medium" style={{ marginLeft: 'auto' }} onClick={toggleChatInterface}>
+      <FiMessageSquare style={{ fontSize: '20px', marginRight: '10px', color: '#f72585', animation: 'bounce 1s infinite' }} />
+        Discuter avec nous      
+        </Button>
       </FormControl>
+
+      {showChatInterface && <ChatInterface />}
     </div>
   );
 };
+
 
 export default CustomSelect;
