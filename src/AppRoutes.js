@@ -6,6 +6,7 @@ import WelcomePage from "./components/WelcomePage/WelcomePage";
 import TradingGame from "./components/TradingGame/TradingGame";
 import Niveau from "./components/Niveau/Niveau";
 import Confetti from "./components/Confetti/Confetti";
+import WaitingRoom from "./components/WaitingRoom.js/WaitingRoom";
 
 const AppRoutes = [
   {
@@ -51,6 +52,10 @@ const AppRoutes = [
   {
     path: '/Confetti',
     element: <Confetti/>
+  },
+  {
+    path: '/Waiting',
+    element: <WaitingRoom/>
   },
 ];
 

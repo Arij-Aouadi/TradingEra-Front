@@ -18,6 +18,7 @@ import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 import CustomSelect from '../Footer/Footer'
 import { Link } from 'react-router-dom';
 import Niveau from '../Niveau/Niveau';
+import WaitingRoom from '../WaitingRoom.js/WaitingRoom';
 
 
 
@@ -144,13 +145,8 @@ export default function Layout({children,role,mode,handleModeChange}) {
                   </Toolbar>
       </AppBar>
             </Grid>
-          <div style={{Width:'100%',
-    overflow:1,scrollbarWidth: 'none',
-    '&::-webkit-scrollbar': {
-        width: '0',
-      }}}>
-          {children}
-          </div>
+          
+          <WaitingRoom elements={children}/>
         </Box>
         
         

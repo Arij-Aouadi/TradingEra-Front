@@ -44,7 +44,7 @@ const getDesignTokens = (mode) => ({
                 
             },
             background:{
-                paper : "rgba(0,0,0,0.1)",
+                paper : "rgba(0,0,0,0)",
                 default :"#000000",
             },
             typography: {
