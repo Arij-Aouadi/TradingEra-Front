@@ -6,40 +6,20 @@ import { DataGrid } from '@mui/x-data-grid';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 import { AwesomeButton } from 'react-awesome-button';
+import { io } from 'socket.io-client';
+import * as THREE from 'three';
+import { ChartComponent } from './Charte';
+import Ordre from '../Ordre/Ordre';
 
-const balanceData = [
-  { value: -300, label: 'Dépenses' }, 
-  { value: 700, label: 'Revenus' }, 
-];
 
 const dailyGain = 35.6;
 const totalGain = 102.2;
 
-const chartSize = {
-  width: 400,
-  height: 200,
-};
-
-const data = [
-  { value: 34.32, label: 'Google' },
-  { value: 18.68, label: 'Meta' },
-  { value: 26.79, label: 'Apple' },
-  { value: 20.21, label: 'Amazon' },
-];
 
 const size = {
-  width: 400,
-  height: 200,
+  width: 520,
+  height: 370,
 };
-const total = data.reduce((acc, curr) => acc + curr.value, 0);
-const columns = [
-  { field: 'symbole', headerName: 'Symbole', width: 130 },
-  { field: 'nom', headerName: 'Nom', width: 250 },
-  { field: 'quantité', headerName: 'Parts', width: 130 },
-  { field: 'valeurActuelle', headerName: 'Valeur Actuelle', width: 180 },
-  { field: 'prixAchat', headerName: 'Prix d\'achat', width: 170 },
-  { field: 'variation', headerName: 'Variation', width: 150 },
-];
 
 function Portefeuille() {
   const [positions, setPositions] = useState([]);
@@ -47,20 +27,9 @@ function Portefeuille() {
   const [revenuTotal, setRevenuTotal] = useState(0);
   const [positionsCount, setPositionsCount] = useState(0);
   const [chartData, setChartData] = useState([]);
+  const [simulatedPrices, setSimulatedPrices] = useState([]);
 
-  useEffect(() => {
-    const authToken = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkb25pYSIsImlhdCI6MTcwMTYwNDQ1MSwiZXhwIjoxNzAxNjIyODUxfQ.-OHv4SeOnMs0vAUNvLs8NzHJ5H3bqpkiy63vSMXMW3UUFlavg97S1SBwJ2odrySASWLbo8CIokr-_knck2MDHQ'
-    const fetchRevenuTotal = async () => {
-      try {
-        const response = await axiosInstance.get('/calculerRevenuTotal', {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-          },
-        });
-        setRevenuTotal(response.data);
-      } catch (error) {
-        console.error('Erreur lors de la récupération du revenu total :', error);
-      }};
+  useEffect(() => {   
     const fetchPositionsCount = async () => {
       try {
         const response = await axiosInstance.get('/count', {
@@ -73,19 +42,6 @@ function Portefeuille() {
         console.error('Erreur lors de la récupération du nombre de positions :', error);
       }
     };
-   
-    const fetchPourcentage = async () => {
-      try {
-        const response= await axiosInstance.get('/pourcentages-revenu', {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-          },
-        });
-      setChartData(response.data);
-    } catch (error) {
-      console.error('Erreur lors de la récupération du nombre de positions :', error);
-    }
-  };
     const fetchPositions = async () => {
       try {
         const response = await axiosInstance.get('/current-user-positions', {
@@ -99,7 +55,6 @@ function Portefeuille() {
         console.log(err);
       }
     };
-    
     const fetchSolde = async () => {
       try {
         const response = await axiosInstance.get('/current-user-solde', {
@@ -116,37 +71,92 @@ function Portefeuille() {
         console.error('Erreur lors de la récupération du solde:', err);
       }
     };
-    fetchRevenuTotal();
     fetchPositions();
     fetchPositionsCount();
-    fetchPourcentage();
     fetchSolde();
-
-
-    // Configurer une fonction qui sera appelée toutes les X millisecondes (par exemple, toutes les 10 secondes)
-    const intervalId = setInterval(() => {
-      fetchRevenuTotal();
+// Configurer une fonction qui sera appelée toutes les X millisecondes (par exemple, toutes les 10 secondes)
+ const intervalId = setInterval(() => {
       fetchPositions();
-      fetchPourcentage();
       fetchPositionsCount();
       fetchSolde();
-
-
-    }, 10000);
-
-    
-    return () => clearInterval(intervalId);
+}, 10000);
+  return () => clearInterval(intervalId);
   }, []);
 
+  const calculatePercentageFromSimulatedPrices = (positions, simulatedPrices) => {
+    console.log('Positions:', positions);
+    console.log('Simulated Prices:', simulatedPrices);
+  
+    const totalRevenu = calculateTotalRevenu(positions, simulatedPrices);
+  
+    console.log('Total Revenu:', totalRevenu);
+  
+    const percentages = positions
+      .filter(position => position.statusPosition.toLowerCase() !== 'archivé')
+      .map(position => {
+        const simulatedPrice = simulatedPrices.find((price, index) => index === positions.indexOf(position));
+        const revenu = position.quantité * (simulatedPrice - position.prixAchat);
+        const pourcentageRevenu = (revenu / totalRevenu) * 100;
+  
+        return {
+          label: position.nom,
+          value: pourcentageRevenu.toFixed(2),
+        };
+      });
+console.log('Percentages:', percentages);
+  
+    return percentages;
+  };
+  
+ 
+   const calculateTotalRevenu = (positions, simulatedPrices) => {
+    const totalRevenu = positions.reduce((acc, position, index) => {
+      const revenuPartiel = position.quantité * (simulatedPrices[index] - position.prixAchat);
+      console.log(`Position ${index + 1}: ${position.quantité} * (${simulatedPrices[index]} - ${position.prixAchat}) = ${revenuPartiel}`);
+      return acc + revenuPartiel;
+    }, 0);
+  
+    console.log(`Total Revenu: ${totalRevenu}`);
+    return totalRevenu;
+  };
+
+  useEffect(() => {
+    const socket = io('http://127.0.0.1:5000/');
+
+  socket.on('connect', () => {
+    console.log('Connected to Flask server');
+  });
+
+  socket.on('my_response', (data) => {
+    console.log(`Received simulated prices: ${data.data}`);
+    setSimulatedPrices(data.data);
+
+    console.log("Positions:", positions);
+    const totalRevenu = calculateTotalRevenu(positions, data.data);
+    setRevenuTotal(totalRevenu);
+    
+    const percentages = calculatePercentageFromSimulatedPrices(positions, data.data);
+    setChartData(percentages);
+    console.log("Percentages:", percentages);
+    setChartData(percentages);
+  });
+
+  return () => {
+    socket.disconnect();
+  };
+}, [positions, setSimulatedPrices, setRevenuTotal, setChartData]);
+
+
   return (
-    <Grid container spacing={3} sx={{ mt: 2, ml: 1 }}>
-      <Grid item xs={6} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Paper sx={{ minHeight: '10vh', padding: 2 }}>
+    <Grid container spacing={1} width="100%" height="100%" sx={{}}>
+              <Grid item xs={12} sx={{mt:2,display:'flex',justifyContent:'space-around',alignItems:'flex-start'}}>
+                <Paper sx={{display:'flex',justifyContent:'space-around',alignItems:'center',minWidth:'70vw',minHeight:'50vh'}}>
+              <div>
           <Typography variant="h6">Valeur Totale de portefeuille</Typography>
           <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
           {`${ + revenuTotal}€`} 
           </Typography>
-          <Divider sx={{ my: 1 }} />
+          <Divider sx={{ my: 3 }} />
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <strong>Gain du jour: </strong>
             {dailyGain >= 0 ? (
@@ -169,20 +179,34 @@ function Portefeuille() {
               {totalGain} €
             </Typography>
           </div>
+          <div sx={{ minHeight: "30vh", padding: 2 }}>
+          <Typography variant="h6" sx={{ borderBottom: '1px solid #ccc', paddingBottom: '8px' }}>Balance</Typography>
+          <Box sx={{ display: 'flex', flexDirection: 'column', paddingTop: '8px' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              
+              <Typography variant="body1">Solde Total:</Typography>
+              <Typography variant="body1" sx={{ fontWeight: 'bold' }}>{solde}</Typography>
+            </Box>
+          </Box>
+        </div>
           <div style={{ display: 'flex', alignItems: 'center', padding: '10px', border: '1px solid #ccc', borderRadius: '5px' }}>
             <strong style={{ marginRight: '10px', fontWeight: 'bold' }}>Nombre total d'actions: </strong>
             <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
               {positionsCount} 
             </Typography>
           </div>
-        </Paper>
-        <Paper sx={{ minHeight: "10vh", textAlign: "right" }}>
-          <PieChart
+              </div>
+              <div>
+  {console.log('Rendering Chart with Data:', chartData)}
+  <PieChart
             series={[
               {
-                arcLabel: (item) => `${item.label} (${((item.value / total) * 100).toFixed(2)}%)`,
-                arcLabelMinAngle: 45,
-                data:chartData,
+                arcLabel: (item) => {
+                  const labelParts = item.label.split(' ');
+                  return labelParts.join('\n') + `\n(${item.value}%)`;
+                },
+                arcLabelMinAngle: 30,
+                data: chartData,
               },
             ]}
             sx={{
@@ -193,23 +217,9 @@ function Portefeuille() {
             }}
             {...size}
           />
-        </Paper>
-      </Grid>
-      <Grid item xs={2.5} sx={{}}>
-        <Paper sx={{ minHeight: "30vh", padding: 2 }}>
-          <Typography variant="h6" sx={{ borderBottom: '1px solid #ccc', paddingBottom: '8px' }}>Balance</Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'column', paddingTop: '8px' }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              
-              <Typography variant="body1">Solde Total:</Typography>
-              <Typography variant="body1" sx={{ fontWeight: 'bold' }}>{solde}</Typography>
-            </Box>
-          </Box>
-        </Paper>
-      </Grid>
-      <Grid item xs={3.5} sx={{}}>
-      <Grid container Spacing={0} sx={{}}>
-        <Paper>
+            </div>
+            </Paper>
+            <Paper sx={{ minHeight: "50vh", minWidth: '25vw'}}>
         <Grid item xs={12} sx={{display:'flex',justifyContent:'space-evenly'}}>
         <AwesomeButton type="primary" className="aws-btn"><Typography sx={{fontFamily:'Orbitron',fontSize:'12px'}}>Sell</Typography></AwesomeButton>
         <AwesomeButton type="secondary" className="aws-btn"><Typography sx={{fontFamily:'Orbitron',fontSize:'12px'}}>Buy</Typography></AwesomeButton>
@@ -320,48 +330,48 @@ function Portefeuille() {
         
         </Grid>
         </Paper>
-        </Grid>
-      </Grid>
-      <Grid item xs={11.5} sx={{}}>
-  <div style={{ height: 400, width: '100%' }}>
+
+</Grid>
+<Grid item xs={12} sx={{display:'flex',justifyContent:'center',alignItems:'flex-start'}}>
+<div style={{minHeight: "100vh", minWidth: '97.5vw'}}>
     <Paper>
-    <Table>
-    <tr class="MuiTableRow-root MuiTableRow-head css-11gm959-MuiTableRow-root"><th class="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium css-l345c8-MuiTableCell-root" scope="col">Symbole</th><th class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-16d9gzc-MuiTableCell-root" scope="col">Nom</th><th class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-16d9gzc-MuiTableCell-root" scope="col">Parts</th><th class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-16d9gzc-MuiTableCell-root" scope="col">valeur Actuelle</th><th class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-16d9gzc-MuiTableCell-root" scope="col">Prix d'achat</th><th class="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium css-16d9gzc-MuiTableCell-root" scope="col">Variation</th></tr>
-      <TableBody sx={{ border: 'none' }}>
-        {positions.map((position) => (
-          <TableRow
-            key={position.idP}
-            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-          >
-            <TableCell sx={{ border: 'none', padding: '3px' }} component="th" scope="row">
-              {position.symbole}
-            </TableCell>
-            <TableCell align="right" sx={{ border: 'none', padding: '3px' }}>
-              {position.nom}
-            </TableCell>
-            <TableCell align="right" sx={{ border: 'none', padding: '3px' }}>
-              {position.quantité}
-            </TableCell>
-            <TableCell align="right" sx={{ border: 'none', padding: '3px' }}>
-              {position.valeurActuelle}
-            </TableCell>
-            <TableCell align="right" sx={{ border: 'none', padding: '3px' }}>
-              {position.prixAchat}
-            </TableCell>
-            <TableCell align="right" sx={{ border: 'none', padding: '3px' }}>
-              {position.variation}
-            </TableCell>
+      <Table sx={{ minWidth: 650 }}>
+        <TableHead>
+          <TableRow>
+            <TableCell align="left" sx={{ borderBottom: 'none', padding: '3px' }}>Symbole</TableCell>
+            <TableCell align="right" sx={{ borderBottom: 'none', padding: '3px' }}>Nom</TableCell>
+            <TableCell align="right" sx={{ borderBottom: 'none', padding: '3px' }}>Quantité</TableCell>
+            <TableCell align="right" sx={{ borderBottom: 'none', padding: '3px' }}>Valeur Actuelle</TableCell>
+            <TableCell align="right" sx={{ borderBottom: 'none', padding: '3px' }}>Prix d'achat</TableCell>
+            <TableCell align="right" sx={{ borderBottom: 'none', padding: '3px' }}>Variation</TableCell>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHead>
+        <TableBody sx={{ border: 'none' }}>
+          {positions.map((position, index) => (
+            <TableRow
+              key={position.idP}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell align="left" sx={{ borderBottom: 'none', padding: '3px' }}>{position.symbole}</TableCell>
+              <TableCell align="right" sx={{ borderBottom: 'none', padding: '3px' }}>{position.nom}</TableCell>
+              <TableCell align="right" sx={{ borderBottom: 'none', padding: '3px' }}>{position.quantité}</TableCell>
+              <TableCell align="right" sx={{ borderBottom: 'none', padding: '3px' }}>{simulatedPrices[index]}</TableCell>
+              <TableCell align="right" sx={{ borderBottom: 'none', padding: '3px' }}>{position.prixAchat}</TableCell>
+              <TableCell align="right" sx={{ borderBottom: 'none', padding: '3px' }}>{position.variation}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </Paper>
   </div>
 </Grid>
-      
-      <Grid item xs={12}></Grid>
-    </Grid>
-  );
+
+
+       <Grid item xs={12}></Grid>
+  </Grid>
+
+     
+    );
 }
 
 export default Portefeuille;
