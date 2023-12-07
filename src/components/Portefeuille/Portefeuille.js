@@ -5,11 +5,6 @@ import axiosInstance from '../../axios';
 import { DataGrid } from '@mui/x-data-grid';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
-import { AwesomeButton } from 'react-awesome-button';
-import { io } from 'socket.io-client';
-import * as THREE from 'three';
-import { ChartComponent } from './Charte';
-import Ordre from '../Ordre/Ordre';
 
 
 const dailyGain = 35.6;
@@ -217,79 +212,8 @@ console.log('Percentages:', percentages);
             }}
             {...size}
           />
-            </div>
-            </Paper>
-            <Paper sx={{ minHeight: "50vh", minWidth: '25vw'}}>
-        <Grid item xs={12} sx={{display:'flex',justifyContent:'space-evenly'}}>
-        <AwesomeButton type="primary" className="aws-btn"><Typography sx={{fontFamily:'Orbitron',fontSize:'12px'}}>Sell</Typography></AwesomeButton>
-        <AwesomeButton type="secondary" className="aws-btn"><Typography sx={{fontFamily:'Orbitron',fontSize:'12px'}}>Buy</Typography></AwesomeButton>
-        </Grid>
-
-        <Grid item xs={12} sx={{display:'flex',justifyContent:'space-between'}}>
-        <FormControl size='small' sx={{ m: 1, minWidth: 135 }}>
-        <Typography sx={{fontSize: '9px',mb:0.25,fontFamily:'Orbitron'}}>Type ordre</Typography>
-        <Select
-          value='buy'//{typeOrdre}
-          onChange=''//{handleChangeTypeOrdre}
-          displayEmpty
-          inputProps={{ 'aria-label': 'Without label' }}
-          sx={{height:'30px',fontFamily:'Orbitron',fontSize:'12px'}}
-        >
-          <MenuItem value={10} sx={{fontFamily:'Orbitron'}}>Limite</MenuItem>
-          <MenuItem value={20} sx={{fontFamily:'Orbitron'}}>Marché</MenuItem>
-          <MenuItem value={30} sx={{fontFamily:'Orbitron'}}>Stop</MenuItem>
-        </Select>
-      </FormControl>
-
-      <FormControl size='small' sx={{ m: 1, width: 135 }} variant="outlined">
-      <Typography sx={{fontSize: '9px',mb:0.25,fontFamily:'Orbitron'}}>Quantité</Typography>
-
-          <OutlinedInput
-            size='small'
-            id="outlined-adornment-weight"
-            endAdornment={<InputAdornment position="end"></InputAdornment>}
-            aria-describedby="outlined-weight-helper-text"
-            inputProps={{
-              'aria-label': 'weight',
-            }}
-            sx={{height:'30px',fontFamily:'Orbitron',fontSize:'12px'}}
-          />
-        
-        </FormControl>
-        
-        </Grid>
-
-        <Grid item xs={12} sx={{display:'flex',justifyContent:'space-between'}}>
-
-        <FormControl size='small' sx={{ m: 1, width: 135 }} variant="outlined">
-            <Typography sx={{fontSize: '9px',mb:0.25,fontFamily:'Orbitron'}}>{ /*a completer */}</Typography>
-
-                <OutlinedInput
-                    size='small'
-                    id="outlined-adornment-weight"
-                    endAdornment={<InputAdornment position="end"></InputAdornment>}
-                    aria-describedby="outlined-weight-helper-text"
-                    inputProps={{
-                    'aria-label': 'weight',
-                    }}
-                    sx={{height:'30px',fontFamily:'Orbitron'}}
-                />
-        </FormControl>
-      
-        <FormControl size='small' sx={{ m: 1, minWidth: 135 }}>
-        <Typography sx={{fontSize: '9px',mb:0.25,fontFamily:'Orbitron'}}>Validité d'Ordre</Typography>
-        <Select
-          value=''//{validite}
-          onChange=''//{handleChangeValidite}
-          displayEmpty
-          inputProps={{ 'aria-label': 'Without label' }}
-          sx={{height:'30px',fontFamily:'Orbitron',fontSize:'12px'}}
-        >
-          <MenuItem value={10} sx={{fontFamily:'Orbitron',fontSize:'12px'}}>un jour</MenuItem>
-          <MenuItem value={20} sx={{fontFamily:'Orbitron',fontSize:'12px'}}>jusqu'à l'annulation</MenuItem>
-        </Select>
-      </FormControl>
-        </Grid>
+        </Paper>
+      </Grid>
 
         <Grid item xs={12} sx={{display:'flex',justifyContent:'space-between',ml:2,mr:2,fontSize:'8px'}}>
         <FormControlLabel sx={{fontSize:'8px',fontFamily:'Orbitron'}}  control={<Checkbox defaultChecked size='small' />} label="Stop-Loss"  />

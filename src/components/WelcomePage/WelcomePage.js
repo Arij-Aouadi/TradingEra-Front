@@ -9,6 +9,7 @@ import axios from "axios";
 
 
 
+
 const WelcomePage = () => {
     const [typedText, setTypedText] = useState("");
     const [progress, setProgress] = React.useState(0);
