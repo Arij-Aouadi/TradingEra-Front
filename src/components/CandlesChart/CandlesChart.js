@@ -1,4 +1,4 @@
-// TradingViewWidget.jsx
+ // TradingViewWidget.jsx
 
 import React, { useEffect, useRef } from 'react';
 
