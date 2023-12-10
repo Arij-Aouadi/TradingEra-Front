@@ -34,7 +34,7 @@ const getDesignTokens = (mode) => ({
             },
             secondary : {
                 dark : "#e60052",
-                main : "#84fffa",
+                main : "#4CC9F0",
                 light : "#dadada",
                 contrastText: "#434651",
             },
@@ -44,23 +44,12 @@ const getDesignTokens = (mode) => ({
                 
             },
             background:{
-                paper : "rgba(0,0,0,0.1)",
+                paper : "rgba(0,0,0,0)",
                 default :"#000000",
             },
-            typography:{
-                fontFamily: [
-                    '-apple-system',
-                    'BlinkMacSystemFont',
-                    '"Segoe UI"',
-                    'Roboto',
-                    '"Helvetica Neue"',
-                    'Arial',
-                    'sans-serif',
-                    '"Apple Color Emoji"',
-                    '"Segoe UI Emoji"',
-                    '"Segoe UI Symbol"',
-                  ].join(','), 
-            },
+            typography: {
+                fontFamily: 'Orbitron', // Set your desired font family
+              },
           }),
     },
   });

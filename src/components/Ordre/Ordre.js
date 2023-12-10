@@ -30,29 +30,29 @@ const Ordre = () => {
   return (
     <Grid container Spacing={0} sx={{}}>
         <Grid item xs={12} sx={{display:'flex',justifyContent:'space-evenly'}}>
-        <AwesomeButton type="primary" className="aws-btn">Sell</AwesomeButton>
-        <AwesomeButton type="secondary" className="aws-btn">Buy</AwesomeButton>
+        <AwesomeButton type="primary" className="aws-btn"><Typography sx={{fontFamily:'Orbitron',fontSize:'12px'}}>Sell</Typography></AwesomeButton>
+        <AwesomeButton type="secondary" className="aws-btn"><Typography sx={{fontFamily:'Orbitron',fontSize:'12px'}}>Buy</Typography></AwesomeButton>
         </Grid>
 
         <Grid item xs={12} sx={{display:'flex',justifyContent:'space-between'}}>
 
         <FormControl size='small' sx={{ m: 1, minWidth: 135 }}>
-        <Typography sx={{fontSize: '9px',mb:0.25}}>Type ordre</Typography>
+        <Typography sx={{fontSize: '9px',mb:0.25,fontFamily:'Orbitron'}}>Type ordre</Typography>
         <Select
           value={typeOrdre}
           onChange={handleChangeTypeOrdre}
           displayEmpty
           inputProps={{ 'aria-label': 'Without label' }}
-          sx={{height:'30px'}}
+          sx={{height:'30px',fontFamily:'Orbitron',fontSize:'12px'}}
         >
-          <MenuItem value={10}>Limite</MenuItem>
-          <MenuItem value={20}>Marché</MenuItem>
-          <MenuItem value={30}>Stop</MenuItem>
+          <MenuItem value={10} sx={{fontFamily:'Orbitron'}}>Limite</MenuItem>
+          <MenuItem value={20} sx={{fontFamily:'Orbitron'}}>Marché</MenuItem>
+          <MenuItem value={30} sx={{fontFamily:'Orbitron'}}>Stop</MenuItem>
         </Select>
       </FormControl>
 
       <FormControl size='small' sx={{ m: 1, width: 135 }} variant="outlined">
-      <Typography sx={{fontSize: '9px',mb:0.25}}>Quantité</Typography>
+      <Typography sx={{fontSize: '9px',mb:0.25,fontFamily:'Orbitron'}}>Quantité</Typography>
 
           <OutlinedInput
             size='small'
@@ -62,7 +62,7 @@ const Ordre = () => {
             inputProps={{
               'aria-label': 'weight',
             }}
-            sx={{height:'30px'}}
+            sx={{height:'30px',fontFamily:'Orbitron',fontSize:'12px'}}
           />
         </FormControl>
         
@@ -71,7 +71,7 @@ const Ordre = () => {
         <Grid item xs={12} sx={{display:'flex',justifyContent:'space-between'}}>
 
         <FormControl size='small' sx={{ m: 1, width: 135 }} variant="outlined">
-            <Typography sx={{fontSize: '9px',mb:0.25}}>{typeOrdre=="10"? "Prix Limite":"Prix de Marché"}</Typography>
+            <Typography sx={{fontSize: '9px',mb:0.25,fontFamily:'Orbitron'}}>{typeOrdre=="10"? "Prix Limite":"Prix de Marché"}</Typography>
 
                 <OutlinedInput
                     size='small'
@@ -81,27 +81,27 @@ const Ordre = () => {
                     inputProps={{
                     'aria-label': 'weight',
                     }}
-                    sx={{height:'30px'}}
+                    sx={{height:'30px',fontFamily:'Orbitron'}}
                 />
         </FormControl>
       
         <FormControl size='small' sx={{ m: 1, minWidth: 135 }}>
-        <Typography sx={{fontSize: '9px',mb:0.25}}>Validité d'Ordre</Typography>
+        <Typography sx={{fontSize: '9px',mb:0.25,fontFamily:'Orbitron'}}>Validité d'Ordre</Typography>
         <Select
           value={validite}
           onChange={handleChangeValidite}
           displayEmpty
           inputProps={{ 'aria-label': 'Without label' }}
-          sx={{height:'30px'}}
+          sx={{height:'30px',fontFamily:'Orbitron',fontSize:'12px'}}
         >
-          <MenuItem value={10}>un jour</MenuItem>
-          <MenuItem value={20}>jusqu'à l'annulation</MenuItem>
+          <MenuItem value={10} sx={{fontFamily:'Orbitron',fontSize:'12px'}}>un jour</MenuItem>
+          <MenuItem value={20} sx={{fontFamily:'Orbitron',fontSize:'12px'}}>jusqu'à l'annulation</MenuItem>
         </Select>
       </FormControl>
         </Grid>
 
         <Grid item xs={12} sx={{display:'flex',justifyContent:'space-between',ml:2,mr:2,fontSize:'8px'}}>
-        <FormControlLabel control={<Checkbox defaultChecked size='small' sx={{fontSize:'8px'}} />} label="Stop-Loss"  />
+        <FormControlLabel sx={{fontSize:'8px',fontFamily:'Orbitron'}}  control={<Checkbox defaultChecked size='small' />} label="Stop-Loss"  />
         <FormControlLabel control={<Checkbox defaultChecked size='small' />} label="Take-Profit" labelPlacement="start" />
         </Grid>
 
@@ -119,7 +119,7 @@ const Ordre = () => {
                     'aria-label': 'weight',
                     }}
                     placeholder='prix du stop'
-                    sx={{height:'30px'}}
+                    sx={{height:'30px',fontFamily:'Orbitron',fontSize:"12px"}}
                 />
         </FormControl>
       
@@ -133,7 +133,7 @@ const Ordre = () => {
               'aria-label': 'weight',
             }}
             placeholder='prix limite'
-            sx={{height:'30px'}}
+            sx={{height:'30px',fontFamily:'Orbitron',fontSize:"12px"}}
           />
         </FormControl>
         

@@ -51,10 +51,10 @@ const MakeNewOrder = () => {
         <Grid item xs={12} sx={{ml:1,mt:0.5}}>
         <div>
             <Stack direction="row" spacing={1}>
-            <Button variant="contained" size='small' onClick={handleShowOpenOrders} sx={{height:'25px',backgroundColor:'#131722',borderRadius:'10px'}} >Ordres Ouverts</Button>
-            <Button variant="contained" size='small' onClick={handleShowPositions} sx={{height:'25px',backgroundColor:'#131722',borderRadius:'10px'}} >Positions</Button>
-            <Button variant="contained" size='small' onClick={handleShowClosedOrders} sx={{height:'25px',backgroundColor:'#131722',borderRadius:'10px'}} >Ordres Fermés</Button>
-            <Button variant="contained" size='small' sx={{height:'25px',backgroundColor:'#131722',borderRadius:'10px'}} >Historique</Button>
+            <Button variant="contained" size='small' onClick={handleShowOpenOrders} sx={{height:'25px',backgroundColor:'#131722',borderRadius:'10px',fontFamily:'Orbitron',fontSize:'12px'}} >Ordres Ouverts</Button>
+            <Button variant="contained" size='small' onClick={handleShowPositions} sx={{height:'25px',backgroundColor:'#131722',borderRadius:'10px',fontFamily:'Orbitron',fontSize:'12px'}} >Positions</Button>
+            <Button variant="contained" size='small' onClick={handleShowClosedOrders} sx={{height:'25px',backgroundColor:'#131722',borderRadius:'10px',fontFamily:'Orbitron',fontSize:'12px'}} >Ordres Fermés</Button>
+            <Button variant="contained" size='small' sx={{height:'25px',backgroundColor:'#131722',borderRadius:'10px',fontFamily:'Orbitron',fontSize:'12px'}} >Historique</Button>
 
             </Stack>
         </div>
@@ -63,8 +63,8 @@ const MakeNewOrder = () => {
 
         <Grid item xs={12}>
             <Paper sx={{background: `linear-gradient(135deg,#000000, #1e222d) `,
-             ml:1,mr:1,mt:1,
-             minHeight:'32vh',
+             ml:1,mr:1,mt:1,mb:1,
+             minHeight:'23vh',
              display:'flex',
              flexDirection: 'column',
              justifyContent: 'space-between'

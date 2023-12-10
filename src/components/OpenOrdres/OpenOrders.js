@@ -18,12 +18,12 @@ export default function OpenOrders({tab}) {
         return (
             <TableHead sx={{mb:10}} >
             <TableRow sx={{border:'none'}}>
-            <TableCell sx={{border:'none',padding:'3px',fontWeight:700,color:'lightgrey'}}>Symbole</TableCell>
-            <TableCell align="right" sx={{border:'none',padding:'3px',fontWeight:700,color:'lightgrey'}}>Nom</TableCell>
-            <TableCell align="right" sx={{border:'none',padding:'3px',fontWeight:700,color:'lightgrey'}}>Parts</TableCell>
-            <TableCell align="right" sx={{border:'none',padding:'3px',fontWeight:700,color:'lightgrey'}}>valeur Actuelle</TableCell>
-            <TableCell align="right"sx={{border:'none',padding:'3px',fontWeight:700,color:'lightgrey'}}>Prix d'achat</TableCell>
-            <TableCell align="right"sx={{border:'none',padding:'3px',fontWeight:700,color:'lightgrey'}}>Variation</TableCell>
+            <TableCell sx={{border:'none',padding:'3px',fontWeight:700,color:'lightgrey',fontFamily:'Orbitron'}}>Symbole</TableCell>
+            <TableCell align="right" sx={{border:'none',padding:'3px',fontWeight:700,color:'lightgrey',fontFamily:'Orbitron',fontSize:'12px'}}>Nom</TableCell>
+            <TableCell align="right" sx={{border:'none',padding:'3px',fontWeight:700,color:'lightgrey',fontFamily:'Orbitron',fontSize:'12px'}}>Parts</TableCell>
+            <TableCell align="right" sx={{border:'none',padding:'3px',fontWeight:700,color:'lightgrey',fontFamily:'Orbitron',fontSize:'12px'}}>valeur Actuelle</TableCell>
+            <TableCell align="right"sx={{border:'none',padding:'3px',fontWeight:700,color:'lightgrey',fontFamily:'Orbitron',fontSize:'12px'}}>Prix d'achat</TableCell>
+            <TableCell align="right"sx={{border:'none',padding:'3px',fontWeight:700,color:'lightgrey',fontFamily:'Orbitron',fontSize:'12px'}}>Variation</TableCell>
           </TableRow>
         </TableHead>
         );
@@ -32,12 +32,12 @@ export default function OpenOrders({tab}) {
         return(
             <TableHead sx={{mb:10}} >
             <TableRow sx={{border:'none'}}>
-            <TableCell sx={{border:'none',padding:'3px',fontWeight:700,color:'lightgrey'}}>Symbole</TableCell>
-            <TableCell align="right" sx={{border:'none',padding:'3px',fontWeight:700,color:'lightgrey'}}>Type Symbole</TableCell>
-            <TableCell align="right" sx={{border:'none',padding:'3px',fontWeight:700,color:'lightgrey'}}>Type Ordre</TableCell>
-            <TableCell align="right" sx={{border:'none',padding:'3px',fontWeight:700,color:'lightgrey'}}>Quantité</TableCell>
-            <TableCell align="right"sx={{border:'none',padding:'3px',fontWeight:700,color:'lightgrey'}}>Prix</TableCell>
-            <TableCell align="right"sx={{border:'none',padding:'3px',fontWeight:700,color:'lightgrey'}}>Validité d'ordre</TableCell>
+            <TableCell sx={{border:'none',padding:'3px',fontWeight:700,color:'lightgrey',fontFamily:'Orbitron'}}>Symbole</TableCell>
+            <TableCell align="right" sx={{border:'none',padding:'3px',fontWeight:700,color:'lightgrey',fontFamily:'Orbitron',fontSize:'12px'}}>Type Symbole</TableCell>
+            <TableCell align="right" sx={{border:'none',padding:'3px',fontWeight:700,color:'lightgrey',fontFamily:'Orbitron',fontSize:'12px'}}>Type Ordre</TableCell>
+            <TableCell align="right" sx={{border:'none',padding:'3px',fontWeight:700,color:'lightgrey',fontFamily:'Orbitron',fontSize:'12px'}}>Quantité</TableCell>
+            <TableCell align="right"sx={{border:'none',padding:'3px',fontWeight:700,color:'lightgrey',fontFamily:'Orbitron',fontSize:'12px'}}>Prix</TableCell>
+            <TableCell align="right"sx={{border:'none',padding:'3px',fontWeight:700,color:'lightgrey',fontFamily:'Orbitron',fontSize:'12px'}}>Validité d'ordre</TableCell>
           </TableRow>
         </TableHead>
         
@@ -57,11 +57,11 @@ export default function OpenOrders({tab}) {
             <TableCell sx={{border:'none',padding:'3px'}} component="th" scope="row">
               {position.symbole}
             </TableCell>
-            <TableCell align="right" sx={{border:'none',padding:'3px'}}>{position.nom}</TableCell>
-            <TableCell align="right" sx={{border:'none',padding:'3px'}}>{position.quantité}</TableCell>
-            <TableCell align="right" sx={{border:'none',padding:'3px'}}>{position.valeurActuelle}</TableCell>
-            <TableCell align="right" sx={{border:'none',padding:'3px'}}>{position.prixAchat}</TableCell>
-            <TableCell align="right" sx={{border:'none',padding:'3px'}}>{position.variation}</TableCell>
+            <TableCell align="right" sx={{border:'none',padding:'3px',fontFamily:'Orbitron',fontSize:'11px'}}>{position.nom}</TableCell>
+            <TableCell align="right" sx={{border:'none',padding:'3px',fontFamily:'Orbitron',fontSize:'11px'}}>{position.quantité}</TableCell>
+            <TableCell align="right" sx={{border:'none',padding:'3px',fontFamily:'Orbitron',fontSize:'11px'}}>{position.valeurActuelle}</TableCell>
+            <TableCell align="right" sx={{border:'none',padding:'3px',fontFamily:'Orbitron',fontSize:'11px'}}>{position.prixAchat}</TableCell>
+            <TableCell align="right" sx={{border:'none',padding:'3px',fontFamily:'Orbitron',fontSize:'11px'}}>{position.variation}</TableCell>
             
           </TableRow>
         ))}
@@ -79,11 +79,11 @@ export default function OpenOrders({tab}) {
                 <TableCell sx={{border:'none',padding:'3px'}} component="th" scope="row">
                   {ordres.symbol}
                 </TableCell>
-                <TableCell align="right" sx={{border:'none',padding:'3px'}}>{ordres.typeSymbol}</TableCell>
-                <TableCell align="right" sx={{border:'none',padding:'3px'}}>{ordres.typetransaction}</TableCell>
-                <TableCell align="right" sx={{border:'none',padding:'3px'}}>{ordres.quantite}</TableCell>
-                <TableCell align="right" sx={{border:'none',padding:'3px'}}>{ordres.prixOrdre}</TableCell>
-                <TableCell align="right" sx={{border:'none',padding:'3px'}}>{ordres.dureeValiditeOrdre}</TableCell>
+                <TableCell align="right" sx={{border:'none',padding:'3px',fontFamily:'Orbitron',fontSize:'11px'}}>{ordres.typeSymbol}</TableCell>
+                <TableCell align="right" sx={{border:'none',padding:'3px',fontFamily:'Orbitron',fontSize:'11px'}}>{ordres.typetransaction}</TableCell>
+                <TableCell align="right" sx={{border:'none',padding:'3px',fontFamily:'Orbitron',fontSize:'11px'}}>{ordres.quantite}</TableCell>
+                <TableCell align="right" sx={{border:'none',padding:'3px',fontFamily:'Orbitron',fontSize:'11px'}}>{ordres.prixOrdre}</TableCell>
+                <TableCell align="right" sx={{border:'none',padding:'3px',fontFamily:'Orbitron',fontSize:'11px'}}>{ordres.dureeValiditeOrdre}</TableCell>
                 
               </TableRow>
             ))}

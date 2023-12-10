@@ -10,8 +10,6 @@ import { ThemeProvider } from '@emotion/react';
 import getDesignTokens from './getDesignTokens';
 import { createTheme } from '@mui/material/styles';
 
-
-
 const App = () => {
   const [mode, setMode] = useState('dark');
   

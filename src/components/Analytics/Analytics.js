@@ -126,7 +126,7 @@ const ParentComponent = () => {
   };
 
   return (
-    <div style={{fontSize: '12px',fontFamily: 'Orbitron, sans-serif',display: 'flex', flexDirection: 'column', alignItems: 'center', background: 'linear-gradient(135deg, #000000, #1e222d)', height: '100vh', marginLeft: '10px', marginRight: '10px', marginTop: '0.05px', color: '#4CC9F0' }}>
+    <div style={{fontSize: '12px',fontFamily: 'Orbitron, sans-serif',display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100vh', marginLeft: '10px', marginRight: '10px', marginTop: '0.05px', color: '#4CC9F0' }}>
 <label htmlFor="symbolSelect" style={{ fontSize: '14px', fontFamily: 'Orbitron, sans-serif', color: 'black' }}>
   Sélectionner une entreprise :
 </label>

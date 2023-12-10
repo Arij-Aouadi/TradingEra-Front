@@ -430,7 +430,7 @@ const handleNextQuestion = () => {
     backgroundRepeat: 'no-repeat',display: 'flex',
     flexDirection: 'column',  // Ajuste la disposition de l'intérieur du Paper
     alignItems: 'center',  // Centre le contenu horizontalement
-    justifyContent: 'center',  background: `linear-gradient(135deg,#000000, #1e222d)`,fontSize: '17px',
+    justifyContent: 'center',fontSize: '17px',
     fontFamily: 'Orbitron' }} >
       <Grid container>
         {/* Stepper */}

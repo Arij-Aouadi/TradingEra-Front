@@ -10,11 +10,14 @@ import ImageIcon from '@mui/icons-material/Image';
 import WorkIcon from '@mui/icons-material/Work';
 import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 import { FaMicrosoft, FaAmazon, FaFacebook,FaTwitter,FaAndroid,FaInstagram,FaAirbnb,FaSnapchat, FaUber, FaPaypal,FaEtsy ,FaSquare} from 'react-icons/fa';
+import { Grid, Typography } from '@mui/material';
+import io from 'socket.io-client';
 
 
 
 function StockList() {
   const [stocks, setStocks] = useState([]);
+  const [simulatedPrices, setSimulatedPrices] = useState([]);
 
   useEffect(() => {
     axiosInstance
@@ -25,6 +28,23 @@ function StockList() {
       .catch((err) => {
         // Gérer les erreurs de requête
       });
+  }, []);
+
+  useEffect(() => {
+    const socket = io('http://127.0.0.1:5000/'); 
+
+    socket.on('connect', () => {
+      console.log('Connected to Flask server');
+    });
+
+    socket.on('my_response', (data) => {
+      console.log(`Received simulated prices: ${data.data}`);
+      setSimulatedPrices(data.data);
+    });
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   const getIconForCompany = (companyName) => {
@@ -70,18 +90,48 @@ function StockList() {
   };
 
   return (
-    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-        {stocks.map((stock) => (
-          <ListItem key={stock.idA}>
-            <ListItemAvatar>
-          <Avatar>
-          {getIconForCompany(stock.name)}
-          </Avatar>
+    <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
+    {stocks.map((stock, index) => (
+      <ListItem key={stock.idA}>
+        <ListItemAvatar>
+          <Avatar>{getIconForCompany(stock.name)}</Avatar>
         </ListItemAvatar>
-        <ListItemText primary={stock.symbole} secondary={stock.coursActuel+" , "+ "+"+stock.variationEnPorcentage+"%" } />
-          </ListItem>
-        ))}
-    </List>
+        <Grid container sx={{ width: '100%' }}>
+          <Grid item xs={8}>
+            <Typography sx={{ fontFamily: 'Orbitron', fontSize: '12px' }}>
+              {stock.symbole}
+            </Typography>
+          </Grid>
+          <Grid item xs={2}>
+            <Typography sx={{ fontFamily: 'Orbitron', fontSize: '12px' }}>
+              {/* Display the simulated price instead of the real price */}
+              {simulatedPrices[index]}
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            spacing={1}
+            display="flex"
+            justifyContent="flex-end"
+          >
+            <Typography
+              sx={{
+                fontFamily: 'Orbitron',
+                fontSize: '10px',
+                color:
+                  stock.variationEnPorcentage >= 0
+                    ? '#f72585'
+                    : '#4CC9F0',
+              }}
+            >
+              {stock.variationEnPorcentage} %
+            </Typography>
+          </Grid>
+        </Grid>
+      </ListItem>
+    ))}
+  </List>
   );
 }
 

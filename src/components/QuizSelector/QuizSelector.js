@@ -10,8 +10,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import {CardActionArea, CardActions } from '@mui/material';
-import YourImage from './images/ah.jpg';
 import YourImg from './images/rah.jpg';
+import YourImage from './images/ah.jpg';
+
 
 import { ArrowBack, ArrowForward, Filter1Sharp, Filter1TwoTone, Filter2TwoTone, Filter3TwoTone, Filter4TwoTone, Filter5TwoTone, Filter6TwoTone, Filter7TwoTone, Filter8TwoTone, Filter9TwoTone, Looks3Rounded, Looks4Rounded, Looks5Rounded, Looks6Rounded, LooksOne, LooksOneOutlined, LooksOneRounded, LooksTwoRounded, OneKkSharp } from '@mui/icons-material';
 
@@ -37,7 +38,6 @@ const QuizSelector = () => {
     sx={{
       height: '93vh',
       justifyContent: 'center',
-      background: `linear-gradient(135deg,#000000, #1e222d)`,
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -48,45 +48,42 @@ const QuizSelector = () => {
     
 <h1 style={{ color: 'white'}}>Sélectionnez le niveau du quiz</h1>
               <RadioGroup value={selectedQuiz} onChange={handleRadioChange} row >
-  <Card sx={{ maxWidth: 200, mr: 20  }}> {/* Added right margin */}
-  <CardActionArea>
-    <CardMedia
-  component="img"
-  src={YourImg}
-  alt="YourImg"
-  style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '10px' }}
-/>
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div" sx={{ mb: 1 , fontSize: '1rem' , textAlign: 'center' ,color: 'white' , fontFamily: 'Orbitron',fontSize :16 }}> {/* Added bottom margin */}
-          THE AMATEUR
-        </Typography>
-      </CardContent>
-    </CardActionArea>
-    <CardActions>
-      <FormControlLabel value="1" control={<Radio />} />
-    </CardActions>
-  </Card>
+              <Card sx={{ maxWidth: 200, mr: 20  }}>
+  <CardMedia
+    component="img"
+    src={YourImg}
+    alt="YourImg"
+    style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '10px' }}
+  />
+  <CardContent>
+    <Typography gutterBottom variant="h5" component="div" sx={{ mb: 1, fontSize: '0.9rem', textAlign: 'center', color: 'white', fontFamily: 'Orbitron', fontSize: 16 }}>
+      THE AMATEUR
+    </Typography>
+  </CardContent>
+  <CardActions>
+    <FormControlLabel value="1" control={<Radio />} />
+  </CardActions>
+</Card>
 
-  <Card sx={{ maxWidth: 200 }}>
-    <CardActionArea>
-    <CardMedia
-  component="img"
-  src={YourImage}
-  alt="Your Image"
-  style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '10px',fontFamily: 'Orbitron' }}
-/>
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div" sx={{ mb: 1 , fontSize: '1.0rem' , textAlign: 'center' ,color: 'white', fontFamily: 'Orbitron',fontSize :16 }}> {/* Added bottom margin */}
-          THE PROFESSIONAL
-        </Typography>
-      </CardContent>
-    </CardActionArea>
-    <CardActions>
-      <FormControlLabel value="2" control={<Radio />}  />
-    </CardActions>
-  </Card>
+<Card sx={{ maxWidth: 200 }}>
+  <CardMedia
+    component="img"
+    src={YourImage}
+    alt="Your Image"
+    style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '10px', fontFamily: 'Orbitron' }}
+  />
+  <CardContent>
+    <Typography gutterBottom variant="h5" component="div" sx={{ mb: 1, fontSize: '0.9rem', textAlign: 'center', color: 'white', fontFamily: 'Orbitron', fontSize: 16 }}>
+      THE PROFESSIONAL
+    </Typography>
+  </CardContent>
+  <CardActions>
+    <FormControlLabel value="2" control={<Radio />} />
+  </CardActions>
+</Card>
+
 </RadioGroup>
-<Paper sx={{ p: 1, background: `#F72585`, color: '#F72585', width: '100%', textAlign: 'center' }}>
+<Paper sx={{ p: 1, background: `#F72585`, color: '#F72585', width: '100%', textAlign: 'center' , mt: 4}}>
   <h1 style={{ fontSize: '16px', fontFamily: 'Orbitron',color: 'white' }}>
     Commencez à jouer sans aucun risque supplémentaire. Vous maîtriserez les techniques de trading Forex d’une manière amusante, facile et sûre.
   </h1>
