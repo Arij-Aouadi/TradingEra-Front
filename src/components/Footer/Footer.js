@@ -44,51 +44,66 @@ const ChatInterface = ({ onClose }) => {
   };
   
   return (
+    <div>
+<div style={{
+  padding: '5px',
+  display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+  position: 'fixed',
+  bottom: '450px',
+  right: '5px',
+  borderRadius: '10px',
+}}>
+  <div style={{ flexDirection: 'column', position: 'relative', fontFamily: 'Orbitron', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+    <div style={{ marginBottom: '50px', paddingBottom: '5px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderRadius: '10px', backgroundColor: 'rgb(53, 55, 70)', height: "10vh", minWidth: '23.5vw' }}>
+      <div style={{ display: 'flex', alignItems: 'center', flex: 1, textAlign: 'center' }}>
+        <FiMessageSquare style={{ fontSize: '30px',marginLeft:'30px' , color: '#f72585', animation: 'bounce 1s infinite', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}} />
+        <Typography variant="h5" style={{ fontWeight: 'bold', color: '#fff', fontFamily: 'Orbitron', fontSize: '20px' ,marginLeft:'40px'}}>TradingEra Live Chat</Typography>
+        <IconButton onClick={onClose} size="small" style={{ color: '#fff' }}>
+        <CloseIcon />
+      </IconButton>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+   
   <Paper elevation={15} style={{ 
       padding: '20px',
       maxWidth: '400px',
-      maxHeight: '500px',
+      height: '480px',
       position: 'fixed', 
-      bottom: '10px', 
+      bottom: '30px', 
       right: '10px', 
+      paddin:'10px',
       backgroundColor: '#fff',
       zIndex: 9999, 
-      overflow:'scroll',scrollbarWidth: 'none',
-      borderRadius: '20px', // Ajout de la bordure
-      boxShadow: '0 0 12px rgba(0,0,0,.15)', // Ajout de la boîte d'ombre
+      borderRadius: '5px', // Ajout de la bordure
+      boxShadow: '0 0 1200px rgba(0,0,0,.15)', // Ajout de la boîte d'ombre
       
     }}>
-     <div style={{ display: 'flex', flexDirection: 'column', position: 'relative', color: 'rgb(88, 65, 216)' }}>
-      <div style={{ marginBottom: '20px', paddingBottom: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderRadius: '10px' }}>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <FiMessageSquare style={{ fontSize: '30px', marginRight: '10px', color: 'blue', animation: 'bounce 1s infinite' }} />
-
-          <div>
-            <Typography variant="h5" style={{ fontWeight: 'bold', color: '#000' }}>TradingEra</Typography>
-            <Typography variant="subtitle1" style={{ color: '#888', fontWeight: 'bold' }}>Live Chat</Typography>
-          </div>
-        </div>
-        <IconButton onClick={onClose} size="small" style={{ color: '#000' }}>
-          <CloseIcon />
-        </IconButton>
-      </div>
-        
-      <div style={{ marginBottom: '10px'}}>
+    
+     
+      <div style={{ marginBottom: '10px', width: '380px',
+      height: '360px',overflowY:'auto',scrollbarWidth: 'none',
+      '&::-webkit-scrollbar': { display: 'none' },}}>
   {messages.map((message, index) => (
     <div
       key={index}
       style={{
         marginBottom: '10px',
-        backgroundColor: message.user === 'Vous' ? 'rgb(88, 65, 216)' : '#f4f6f8',
+        backgroundColor: message.user === 'Vous' ? '#f72585' : '#f4f6f8',
         color: message.user === 'Vous' ? 'rgb(255, 255, 255)' : '#000',
         padding: '20px',
         fontSize: '17px',
         borderRadius: '25px',
+        fontFamily:'Orbitron',
         fontWeight: message.user === 'Vous' ? 'bold' : 'normal',
       }}
     >
        {message.user !== 'Vous' && (
-         <FaRobot style={{ fontSize: '20px', marginRight: '10px', color: 'orange', animation: 'spin 2s linear infinite' }} />
+         <FaRobot style={{ fontSize: '30px', marginRight: '10px', color: '#7df2f0', animation: 'spin 2s linear infinite' }} />
          )}
       <span>
         <strong>{message.user}:</strong> {message.text}
@@ -98,13 +113,15 @@ const ChatInterface = ({ onClose }) => {
 </div>
         
       <div style={{ display: 'flex', alignItems: 'center', backgroundColor: '#fff', borderRadius: '100px', padding: '5px' }}>
-        <TextField id="outlined-basic" variant="outlined" style={{ flex: 1 }}InputProps={{type: "text",value: question, onChange: (e) => setQuestion(e.target.value),style: {fontSize: '20px',padding: '8px', borderRadius: '40px',color: '#000', },placeholder: "Type your message...",}}/>
-             <Button variant="contained"color="primary"onClick={addMessage} style={{ padding: '8px', borderRadius: '40px', color: '#fff' }}>
+        <TextField id="outlined-basic" variant="outlined" style={{ flex: 1 }}InputProps={{type: "text",value: question, onChange: (e) => setQuestion(e.target.value),style: {fontSize: '15px',padding: '8px', borderRadius: '40px',color: '#000', fontFamily:'Orbitron'},placeholder: "Tapez votre message ici...",}}/>
+             <Button variant="contained"color="primary"onClick={addMessage} style={{ padding: '8px', borderRadius: '40px', color: '#fff',fontFamily:'Orbitron' }}>
                Envoyer
              </Button>
             </div>
+      
+         </Paper> 
          </div>
-    </Paper>
+
   );
 };
   

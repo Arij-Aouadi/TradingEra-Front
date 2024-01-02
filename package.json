@@ -11,8 +11,6 @@
     "@mui/x-data-grid": "^6.10.0",
     "@mui/x-data-grid-generator": "^6.17.0",
     "@mui/x-data-grid-pro": "^6.17.0",
-    "@react-three/drei": "^9.90.0",
-    "@react-three/fiber": "^8.15.12",
     "@react-three/drei": "^9.89.0",
     "@react-three/fiber": "^8.15.11",
     "@react-three/postprocessing": "^2.15.11",
