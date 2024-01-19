@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
 import {
   EffectComposer,
@@ -24,7 +24,7 @@ import { AwesomeButton } from 'react-awesome-button';
 
 
 
-function CarShow() {
+const CarShow= React.memo(() => {
   return (
     <>
       <OrbitControls 
@@ -60,7 +60,7 @@ function CarShow() {
        
      </>
   );
-}
+  })
 
 function Background3D({elements}) {
   return (
@@ -77,4 +77,4 @@ function Background3D({elements}) {
   );
 }
 
-export default WaitingRoom;
+export default Background3D;

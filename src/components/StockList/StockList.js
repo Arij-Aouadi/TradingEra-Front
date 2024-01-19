@@ -18,6 +18,9 @@ import io from 'socket.io-client';
 function StockList() {
   const [stocks, setStocks] = useState([]);
   const [simulatedPrices, setSimulatedPrices] = useState([]);
+  const [variation,setVariation] = useState([]);
+  const [variationEnPorcentage,setVariationEnPorcentage] = useState([]);
+
 
   useEffect(() => {
     axiosInstance
@@ -38,9 +41,10 @@ function StockList() {
     });
 
     socket.on('my_response', (data) => {
-      console.log(`Received simulated prices: ${data.data}`);
       setSimulatedPrices(data.data);
-    });
+      setVariation(data.variation);
+      setVariationEnPorcentage(data.variationEn)
+      });
 
     return () => {
       socket.disconnect();
@@ -120,12 +124,25 @@ function StockList() {
                 fontFamily: 'Orbitron',
                 fontSize: '10px',
                 color:
-                  stock.variationEnPorcentage >= 0
+                  variationEnPorcentage[index] <= 0
                     ? '#f72585'
                     : '#4CC9F0',
               }}
             >
-              {stock.variationEnPorcentage} %
+              {variation[index]},
+            </Typography>
+            <Typography
+              sx={{
+                ml:1,
+                fontFamily: 'Orbitron',
+                fontSize: '10px',
+                color:
+                  variationEnPorcentage[index] <= 0
+                    ? '#f72585'
+                    : '#4CC9F0',
+              }}
+            >
+              {variationEnPorcentage[index]} %
             </Typography>
           </Grid>
         </Grid>

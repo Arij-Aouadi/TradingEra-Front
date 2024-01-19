@@ -12,9 +12,24 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import NewReleasesIcon from '@mui/icons-material/NewReleases';
 import SettingsIcon from '@mui/icons-material/Settings';
 import Grid from '@mui/material/Grid';
+import io from 'socket.io-client';
+
 
 const CustomSelect = () => {
   const [selectedOption, setSelectedOption] = React.useState('top-gaining');
+  const [variationEnPorcentage,setVariationEnPorcentage] = React.useState([]);
+
+  React.useEffect(() => {
+    const socket = io('http://127.0.0.1:5000/'); 
+
+    socket.on('my_response', (data) => {
+      setVariationEnPorcentage(data.variationEn)
+      });
+    
+
+    
+  }, []);
+
 
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
@@ -75,9 +90,9 @@ const CustomSelect = () => {
         {selectedOption && (
           <List sx={{ display: 'flex', flexDirection: 'row', padding: 0, marginLeft: '16px' }}>
             {/* Ajoutez les éléments de la liste horizontale ici */}
-            <ListItem sx={{minWidth:120}}>GOOGL <span style={{color:"#F72585"}}> 6.5%</span></ListItem>
-            <ListItem sx={{minWidth:120}}>AAPL <span style={{color:"#F72585"}}>5.6%</span></ListItem>
-            <ListItem sx={{minWidth:120}}>MSFT <span style={{color:"#F72585"}}>3.5%</span></ListItem>
+            <ListItem sx={{minWidth:120}}>APPL <span style={{color:variationEnPorcentage[1] <= 0? '#f72585': '#4CC9F0'}}> {variationEnPorcentage[1]}</span></ListItem>
+            <ListItem sx={{minWidth:120}}>AMZN <span style={{color:variationEnPorcentage[3] <= 0? '#f72585': '#4CC9F0'}}>{variationEnPorcentage[3]}</span></ListItem>
+            <ListItem sx={{minWidth:120}}>PYPL <span style={{color:variationEnPorcentage[9] <= 0? '#f72585': '#4CC9F0'}}>{variationEnPorcentage[9]}</span></ListItem>
           </List>
         )}
       </FormControl>

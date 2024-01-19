@@ -23,10 +23,6 @@ const Home = () => {
 
   return (
     <motion.div
-    initial={{ opacity: 0, scale: 0.1 }}
-    animate={{ opacity: 1, scale: 1 }}
-    exit={{ x: "-100vh",
-    transition: { ease: 'easeInOut' }}}
     style={{}}
     >
     <Grid container spacing={0.5} width="100%" height="100%" sx={{display:'flex',justifyContent: 'center',mt:0.25,flexGrow:1,

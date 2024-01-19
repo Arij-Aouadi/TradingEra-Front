@@ -99,9 +99,10 @@ function LoginForm({mode,handleModeChange}) {
             })
         .then((res) => {
                 localStorage.setItem('access_token', res.data.token);
-                localStorage.setItem('isAuthenticated', true);
+                localStorage.setItem('isAuthenticated', "true");
                 localStorage.setItem('userId',res.data.id);
                 localStorage.setItem('userRole',res.data.roles[0]);
+                localStorage.setItem('GameOn',"false")
               
                 axiosInstance.get('/NiveauUser',{
                     headers: {
@@ -168,7 +169,7 @@ function LoginForm({mode,handleModeChange}) {
                                         type="submit"
                                         fullWidth
                                         variant="contained"
-                                        sx={{ mt: 3, mb: 2 }}
+                                        sx={{ mt: 3, mb: 2,backgroundColor: '#000000', ":hover":{boxShadow: "0px 0px 5px rgb(255,255,255)"} }}
                                     >
                                     submit
                                     </Button>

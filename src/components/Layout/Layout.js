@@ -18,21 +18,20 @@ import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 import CustomSelect from '../Footer/Footer'
 import { Link } from 'react-router-dom';
 import Niveau from '../Niveau/Niveau';
-import WaitingRoom from '../WaitingRoom.js/WaitingRoom';
+import Background3D from '../WaitingRoom.js/Background3D';
 
 
 
 
 //AppBar
 const pages = ['Jouer', 'Options', 'Portefeuille','Apprendre','Historique','Competition'];
-
+const elementContext = React.createContext(null)
 
 
 export default function Layout({children,role,mode,handleModeChange}) {
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -89,7 +88,6 @@ export default function Layout({children,role,mode,handleModeChange}) {
             TradingEra
           </Typography>
           {pages.map((page) => (
-
                 <MenuItem key={page} component={Link} to={`/${page}`} sx={{fontSize:'13px',textDecoration: 'none', color: 'inherit',mb:2.5,'&:hover': {
                   borderRadius: '4px',height:25,textShadow: "0px 0px 5px rgb(255,255,255)"
                   ,color:'white'}}}>
@@ -145,8 +143,9 @@ export default function Layout({children,role,mode,handleModeChange}) {
                   </Toolbar>
       </AppBar>
             </Grid>
-          
-          <WaitingRoom elements={children}/>
+            
+            
+        <Background3D elements={children}/>
         </Box>
         
         
