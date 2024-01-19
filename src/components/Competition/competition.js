@@ -1,39 +1,82 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Table from '@mui/material/Table';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TableContainer from '@mui/material/TableContainer';
+import Typography from '@mui/material/Typography';
+import axiosInstance from '../../axios';
 
-  export default function Competition() {
+export default function Competition() {
+  const [data, setData] = useState([]);
 
-    const renderTableHead = () => {
-      return (
-        <TableHead sx={{ mb: 10 }}>
-          <TableRow sx={{ border: 'none' }}>
-            <TableCell sx={{ border: 'none', padding: '3px', fontWeight: 700, color: 'lightgrey' }}>Rank</TableCell>
-            <TableCell align="right" sx={{ border: 'none', padding: '3px', fontWeight: 700, color: 'lightgrey' }}>Nickname</TableCell>
-            <TableCell align="right" sx={{ border: 'none', padding: '3px', fontWeight: 700, color: 'lightgrey' }}>PNL%</TableCell>
-            <TableCell align="right" sx={{ border: 'none', padding: '3px', fontWeight: 700, color: 'lightgrey' }}>Expected Reward</TableCell>
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axiosInstance.get('/ranku', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+          },
+        });
+        const dataWithIds = response.data.map((item, index) => ({ id: index + 1, ...item }));
+        setData(dataWithIds);
+      } catch (err) {
+        console.error('Error fetching data:', err);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const renderTable = () => (
+    <Table>
+      <TableHead>
+        <TableRow>
+
+          <TableCell>         
+          <Typography sx={{ color: '#EEC4C9', fontSize: ' 1.5 rem'   }}>
+                 Rank         
+                </Typography>
+          </TableCell>
+
+          <TableCell>         
+          <Typography sx={{ color: '#EEC4C9', fontSize: ' 1.5 rem'   }}>
+                 Username        
+                </Typography>
+          </TableCell>
+          <TableCell >
+          <Typography sx={{ color: '#EEC4C9', fontSize: ' 1.5 rem' }}>
+                       Revenu   
+                </Typography>
+          
+            </TableCell>
+        </TableRow>
+      </TableHead>
+      <tbody>
+        {data.map((row) => (
+          <TableRow key={row.rank}>
+            <TableCell><Typography sx={{fontSize: ' 1rem'  }}>
+                     {row.rank}  
+                </Typography></TableCell>
+            <TableCell > <Typography  sx={{fontSize: ' 1rem'   }}>
+                      {row.username}
+                </Typography></TableCell>
+            <TableCell > <Typography  sx={{fontSize: ' 1rem'   }}>
+                     {row.revenue}
+                </Typography></TableCell>
           </TableRow>
-        </TableHead>
-      );
-    }
-    
-      
+        ))}
+      </tbody>
+    </Table>
+  );
 
-      return ( 
-        <TableContainer component={Paper} sx={{ height: '32vh', background: 'linear-gradient(135deg,#000000, #1e222d)', border: 'none', overflow: 1, scrollbarWidth: 'none', '&::-webkit-scrollbar': { width: '0' } }}>
-        
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          {renderTableHead()}
-        </Table>
-      </TableContainer>
-    );
-  
+  return (
+    <TableContainer component={Paper}>
+      {renderTable()}
+      <Typography variant="body2">
+        Tradez plus pour améliorer votre classement. Consultez nos analyses de marché pour des opportunités lucratives. Les performances passées ne garantissent pas les résultats futurs. Investissez de manière responsable.
+      </Typography>
+    </TableContainer>
+  );
 }
-
-
-
-
