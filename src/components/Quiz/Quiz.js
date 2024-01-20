@@ -244,22 +244,6 @@ const Quiz = () => {
   const [selectedQuizId, setSelectedQuizId] = useState(null);
   const { quizId } = useParams();
 
-
-
-
-
-  /*useEffect(() => {
-    // Remplacez l'URL par l'URL de votre backend
-    axios.get(`http://localhost:1010/api/quizzes/1/time`)
-      .then(response => {
-        setRemainingTime(response.data);
-      })
-      .catch(error => {
-        console.error('Erreur lors de la récupération du temps restant', error);
-      });
-  }, [quizId]);*/
-  
-
   useEffect(() => {
     const timer = setInterval(() => {
       // Mettez à jour le temps restant chaque seconde
@@ -286,37 +270,38 @@ const Quiz = () => {
   
 
 
+  const fetchUserAnswers = async () => {
+    try {
+      const userAnswersData = await Promise.all(
+        questions.map(async (question) => {
+          const response = await axios.get(
+            `http://localhost:1010/api/useranswer/question/${question.id}/useranswers`
+          );
+          console.log('User Answers Response for Question', question.id, ':', response.data);
+          return {
+            questionId: question.id,
+            userAnswers: response.data,
+          };
+        })
+      );
+  
+      const flattenedUserAnswers = userAnswersData
+        .flatMap((data) => data.userAnswers.map((answer) => ({ ...answer, questionId: data.questionId })));
+  
+      setUserAnswers(flattenedUserAnswers);
+    } catch (error) {
+      console.error('Error fetching user answers:', error);
+    } finally {
+      setLoadingUserAnswers(false);
+    }
+  };
+  
   useEffect(() => {
-    const fetchUserAnswers = async () => {
-      try {
-        const userAnswersData = await Promise.all(
-          questions.map(async (question) => {
-            const response = await axios.get(
-              `http://localhost:1010/api/useranswer/question/${question.id}/useranswers`
-            );
-            console.log('User Answers Response for Question', question.id, ':', response.data);
-            return {
-              questionId: question.id,
-              userAnswers: response.data,
-            };
-          })
-        );
-  
-        const flattenedUserAnswers = userAnswersData
-          .flatMap((data) => data.userAnswers.map((answer) => ({ ...answer, questionId: data.questionId })));
-  
-        setUserAnswers(flattenedUserAnswers);
-      } catch (error) {
-        console.error('Error fetching user answers:', error);
-      } finally {
-        setLoadingUserAnswers(false);
-      }
-    };
-  
     if (questions.length > 0) {
       fetchUserAnswers();
     }
-  }, [questions]);
+  }, [questions, quizId]); // Ajoutez quizId à la liste des dépendances
+  
   
   const getCorrectAnswers = async (quizId) => {
     try {
@@ -344,8 +329,7 @@ const Quiz = () => {
   const handleOptionClick = async (userAnswer) => {
     try {
       // Remplacez la variable quizId par la valeur 1
-      const quizId = 1;
-  
+      const quizIdFromParams = quizId;  
       // Récupérez les réponses correctes du serveur
       const correctAnswers = await getCorrectAnswers(quizId);
   

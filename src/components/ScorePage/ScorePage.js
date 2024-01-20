@@ -4,6 +4,7 @@ import { Grid, Paper } from '@mui/material';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import BadgeIcon from '@mui/icons-material/EmojiEvents';
 
+
 function ScorePage() {
   const location = useLocation();
   const scoreFromURL = new URLSearchParams(location.search).get('score');

@@ -9,13 +9,13 @@ import Confetti from "./components/Confetti/Confetti";
 import WaitingRoom from "./components/WaitingRoom.js/WaitingRoom";
 import Quiz from "./components/Quiz/Quiz";
 import ScorePage from './components/ScorePage/ScorePage';  // Assurez-vous d'ajuster le chemin d'importation
-import Themes from './components/Themes/Themes'; // Importer le composant Themes
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import FinancialTermDetail from './components/FinancialTermDetail/FinancialTermDetail';
 import QuizSelector from "./components/QuizSelector/QuizSelector";
 import React, { useState } from 'react';
 import Analytics from "./components/Analytics/Analytics";
-
+import Learn from "./components/Learn/Learn";
+import ChatBot from "./components/ChatBot/ChatBot";
 
 
 
@@ -78,10 +78,6 @@ const AppRoutes = [
     element: <ScorePage />
   },
   {
-    path: '/themes',
-    element: <Themes />
-  },
-  {
     path: '/financial-term/:id',
     element: <FinancialTermDetail />
   },
@@ -92,6 +88,14 @@ const AppRoutes = [
   {
     path: '/Analyse',
     element: <Analytics />
+  },
+  {
+    path: '/learn',
+    element: <Learn />
+  },
+  {
+    path: '/chatBot',
+    element: <ChatBot />
   },
 
 
