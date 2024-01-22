@@ -8,6 +8,7 @@ import Confetti from "./components/Confetti/Confetti";
 import WaitingRoom from "./components/WaitingRoom.js/WaitingRoom";
 import TradingGame from './components/TradingGame/TradingGame';
 import Historique from './components/Historique/Historique'
+import News from "./components/News/news";
 const AppRoutes = [
   {
     index: true,
@@ -61,6 +62,10 @@ const AppRoutes = [
   {
     path: '/Waiting',
     element: <WaitingRoom/>
+  },
+  {
+    path: '/news',
+    element: <News/>
   },
 ];
 

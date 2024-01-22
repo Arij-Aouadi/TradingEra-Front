@@ -26,7 +26,7 @@ import WaitingRoom from '../WaitingRoom.js/WaitingRoom';
 
 
 //AppBar
-const pages = ['Jouer', 'Options', 'Portefeuille','Apprendre','Historique','Competition'];
+const pages = ['Jouer', 'Options', 'Portefeuille','Apprendre','Historique','Competition','News',];
 
 
 
