@@ -30,6 +30,8 @@ export default function TradingViewWidget() {
       function createWidget() {
         if (document.getElementById('tradingview_a361e') && 'TradingView' in window) {
           new window.TradingView.widget({
+
+      
             autosize: true ,
             height: "auto",
             custom_css_url: 'css/Style.css',

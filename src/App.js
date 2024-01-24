@@ -9,6 +9,8 @@ import { useState } from 'react';
 import { ThemeProvider } from '@emotion/react';
 import getDesignTokens from './getDesignTokens';
 import { createTheme } from '@mui/material/styles';
+import { AnimatePresence, motion } from "framer-motion";
+import WelcomePage from './components/WelcomePage/WelcomePage';
 
 const App = () => {
   const [mode, setMode] = useState('dark');

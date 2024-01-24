@@ -3,7 +3,6 @@ import Register from "./pages/Register";
 import Home from "./components/Home/Home";
 import Portefeuille from "./components/Portefeuille/Portefeuille";
 import WelcomePage from "./components/WelcomePage/WelcomePage";
-import TradingGame from "./components/TradingGame/TradingGame";
 import Niveau from "./components/Niveau/Niveau";
 import Confetti from "./components/Confetti/Confetti";
 import WaitingRoom from "./components/WaitingRoom.js/WaitingRoom";
@@ -16,7 +15,8 @@ import React, { useState } from 'react';
 import Analytics from "./components/Analytics/Analytics";
 import Learn from "./components/Learn/Learn";
 import ChatBot from "./components/ChatBot/ChatBot";
-
+import TradingGame from './components/TradingGame/TradingGame';
+import Historique from './components/Historique/Historique'
 
 
 const AppRoutes = [
@@ -31,6 +31,14 @@ const AppRoutes = [
   {
       path: '/Jouer',
       element: <Home />
+  },
+  {
+    path: '/Competition',
+    element: <TradingGame/>
+  },
+  {
+    path: '/Historique',
+    element: <Historique />
   },
   {
     path: '/manageUsers',
@@ -51,10 +59,6 @@ const AppRoutes = [
   {
     path: '/welcome',
     element: <WelcomePage/>
-  },
-  {
-    path: '/Competition',
-    element: <TradingGame/>
   },
   {
     path: '/Star',
@@ -94,7 +98,7 @@ const AppRoutes = [
     element: <Learn />
   },
   {
-    path: '/chatBot',
+    path: '/chatbot',
     element: <ChatBot />
   },
 
