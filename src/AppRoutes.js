@@ -17,7 +17,7 @@ import Learn from "./components/Learn/Learn";
 import ChatBot from "./components/ChatBot/ChatBot";
 import TradingGame from './components/TradingGame/TradingGame';
 import Historique from './components/Historique/Historique'
-
+import News from "./components/News/news";
 
 const AppRoutes = [
   {
@@ -101,8 +101,10 @@ const AppRoutes = [
     path: '/chatbot',
     element: <ChatBot />
   },
-
-
+  {
+    path: '/news',
+    element: <News />
+  },
 ];
 
 export default AppRoutes;
