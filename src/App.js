@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import AppRoutes from './AppRoutes';
 import './custom.css';
 import Layout from './components/Layout/Layout';
@@ -14,7 +14,6 @@ import WelcomePage from './components/WelcomePage/WelcomePage';
 
 const App = () => {
   const [mode, setMode] = useState('dark');
-  const location = useLocation();
   
   const handleModeChange = (newMode) => {
     setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
@@ -28,9 +27,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <AnimatePresence >
-      <Routes location={location} key={location.key}>
-
+      <Routes>
         {AppRoutes.map((route, index) => {
           const { element, ...rest } = route;
           if (route.index === true) {
@@ -38,17 +35,12 @@ const App = () => {
           }
           if (route.path === '/register') {
             return <Route key={index} path="/register" element={<Register />} />;
-          } 
-          if (route.path === '/welcome') {
-            return <Route key={index} path="/welcome" element={<WelcomePage />} />;
-          }
-          else {
+          } else {
             var userRole = "employee";
             return <Route key={index} {...rest} element={<Layout role={userRole} mode={mode} handleModeChange={handleModeChange} children={element} />} />;
           }
         })}
       </Routes>
-      </AnimatePresence>
     </ThemeProvider>
   );
 };
