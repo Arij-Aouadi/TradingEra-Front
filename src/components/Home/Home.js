@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import {Grid, Paper, ThemeProvider} from '@mui/material'
 import { useTheme } from '@emotion/react'
 import TradingViewWidget from '../CandlesChart/CandlesChart'
@@ -9,15 +9,47 @@ import OrderBook from '../OrderBook/OrderBook';
 import { motion } from 'framer-motion';
 import CustomSelect from '../Footer/Footer'
 import SchoolPride from '../Confetti/SchoolPride';
+import io from 'socket.io-client'; 
+
 
 const Home = () => {
   var theme = useTheme();
   const [confetti,setConfetti]=useState(false);
+  const [symbolOnHome,setSymbolOnHome]=useState("AAPL");
+  const [simulatedPrices, setSimulatedPrices] = useState([]);
+  const symbols = ["GOOGL", "AAPL", "MSFT", "AMZN", "Meta","PYPL","NVDA","TSLA","ORCL","SHEL"] ;
+
+
+  const findIndexInList = (list, searchString) => {
+    const index = list.indexOf(searchString);
+  
+    return index;
+  }
+
+
   const textAnimationVariants = {
     initial: { opacity: 1,},
     animate: { opacity: 0,},
     exit: { opacity: 0, },
   };
+  const handleSymbolInHomePage= (data) =>{
+    setSymbolOnHome(data);
+  }
+  const handleSimulatedPrices= (data) =>{
+    setSimulatedPrices(data);
+  }
+  useEffect(() => {
+    console.log(symbolOnHome)
+  }, [symbolOnHome]);
+
+  React.useEffect(()=>{
+    const socket = io('http://127.0.0.1:5000/'); 
+
+    socket.on('my_response', (data) => {
+      setSimulatedPrices(data.data)
+      });
+
+  },[]);
 
 
 
@@ -39,19 +71,19 @@ const Home = () => {
 
         <Grid item xs={2.5} >
         <Paper sx={{minHeight:"86svh",background: `linear-gradient(135deg,#000000, #1e222d)`}} >
-        <StockList></StockList>    </Paper>
+        <StockList handleSymbol={handleSymbolInHomePage} handlePrices={handleSimulatedPrices} Prices={simulatedPrices}></StockList>    </Paper>
         </Grid>
 
         <Grid item container xs={9.5} spacing={1}>
   <Grid item xs={8.5} sx={{}}>
     <Paper id="tradingview_a361e" sx={{height:'44vh',width:'100%'}}>
-      <TradingViewWidget/>    
+      <TradingViewWidget chartSymbol={symbolOnHome}/>    
       </Paper>
   </Grid>
 
   <Grid item xs={3.5}>
     <Paper sx={{minHeight:"44vh",background: `linear-gradient(135deg,#000000, #1e222d) `,display:'flex',justifyContent:'center',alignItems:'center'}}>
-      <OrderBook/>
+      <OrderBook symbolOfOrders={symbolOnHome} coursActuel={simulatedPrices[findIndexInList(symbols,symbolOnHome)]}/>
     </Paper>
   </Grid>
 
@@ -67,7 +99,7 @@ const Home = () => {
                 display:'flex',
                 justifyContent:'center',
                 alignItems:'center'}}>
-        <Ordre></Ordre></Paper>
+        <Ordre symbolOfOrders={symbolOnHome} coursActuel={simulatedPrices[findIndexInList(symbols,symbolOnHome)]} idAction={findIndexInList(symbols,symbolOnHome)+1}></Ordre></Paper>
   </Grid>
 </Grid>  
 
@@ -79,31 +111,7 @@ const Home = () => {
       </Grid>
 
     </Grid>
-    <motion.div
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          variants={textAnimationVariants}
-          transition={{ delay: 1 , duration: 1.6 }}
-          style={{
-            minWidth:'40%',
-            minHeight:'35%',
-            position: 'fixed',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            zIndex: 1000, // Make sure it's above other components
-            textAlign: 'center',
-            fontSize: '9rem',
-            color: '#ffffff', // Change color as needed
-            fontFamily: 'Orbitron',
-            borderRadius: '40px',
-            background:`linear-gradient(135deg,#000000, #1e222d)`,
-            textShadow: "0px 0px 5px rgb(255,255,255)"
-          }}
-        >
-          Day 1
-        </motion.div>
+   
         <motion.div
         initial="initial"
         animate="animate"

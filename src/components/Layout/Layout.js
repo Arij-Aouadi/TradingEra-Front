@@ -23,6 +23,8 @@ import Background3D from '../WaitingRoom.js/Background3D';
 
 
 
+
+
 //AppBar
 const pages = ['Jouer', 'Options', 'Portefeuille','Apprendre','Historique','Competition'];
 const elementContext = React.createContext(null)

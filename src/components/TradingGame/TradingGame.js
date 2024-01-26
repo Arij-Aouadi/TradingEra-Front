@@ -28,7 +28,8 @@ const TradingGame = () => {
 
   return (
     <ThemeProvider theme={theme}>
-<Grid container spacing={1} width="100%" sx={{ display: 'flex', justifyContent: 'center', mt: 1, height: '100vh', overflow: 'auto', scrollbarWidth: 'none', '&::-webkit-scrollbar': { display: 'none' }  }}>        <Grid item xs={12}>
+      <Grid container spacing={1} width="100%" sx={{ display: 'flex', justifyContent: 'center', mt: 1, height: '100vh', overflow: 'auto', scrollbarWidth: 'none', '&::-webkit-scrollbar': { display: 'none' }  }}>
+        <Grid item xs={12}>
           <Paper sx={{ minHeight: '50%', background: `linear-gradient(135deg,#000000, #1e222d)` }}>
           <Typography variant="h7" sx={{ color: '#FFFFFF', paddingTop: 2, paddingLeft: 2 }}>
             Leaderboard

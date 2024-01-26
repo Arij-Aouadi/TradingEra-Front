@@ -9,15 +9,16 @@ import Avatar from '@mui/material/Avatar';
 import ImageIcon from '@mui/icons-material/Image';
 import WorkIcon from '@mui/icons-material/Work';
 import BeachAccessIcon from '@mui/icons-material/BeachAccess';
-import { FaMicrosoft, FaAmazon, FaFacebook,FaTwitter,FaAndroid,FaInstagram,FaAirbnb,FaSnapchat, FaUber, FaPaypal,FaEtsy ,FaSquare} from 'react-icons/fa';
+import { FaMicrosoft,FaNVDA, FaAmazon, FaFacebook,FaTwitter,FaAndroid,FaInstagram,FaAirbnb,FaSnapchat, FaUber, FaPaypal,FaEtsy ,FaSquare} from 'react-icons/fa';
 import { Grid, Typography } from '@mui/material';
+import { SiTesla,SiNvidia,SiOracle } from "react-icons/si";
 import io from 'socket.io-client';
 
 
 
-function StockList() {
+function StockList({handleSymbol,handlePrices,Prices}) {
   const [stocks, setStocks] = useState([]);
-  const [simulatedPrices, setSimulatedPrices] = useState([]);
+  //const [simulatedPrices, setSimulatedPrices] = useState([]);
   const [variation,setVariation] = useState([]);
   const [variationEnPorcentage,setVariationEnPorcentage] = useState([]);
 
@@ -27,11 +28,13 @@ function StockList() {
       .get('/action/showall')
       .then((res) => {
         setStocks(res.data);
+        console.log(Prices)
       })
       .catch((err) => {
         // Gérer les erreurs de requête
       });
   }, []);
+
 
   useEffect(() => {
     const socket = io('http://127.0.0.1:5000/'); 
@@ -41,7 +44,7 @@ function StockList() {
     });
 
     socket.on('my_response', (data) => {
-      setSimulatedPrices(data.data);
+      //setSimulatedPrices(data.data);
       setVariation(data.variation);
       setVariationEnPorcentage(data.variationEn)
       });
@@ -56,21 +59,21 @@ function StockList() {
       return <FaGoogle />;
     } else if (companyName === 'apple') {
       return <FaApple />;
-    } else if (companyName === 'COMP1') {
-      return <FaBuilding />;
+    } else if (companyName === 'tesla') {
+      return <SiTesla />;
     } else if (companyName === 'microsoft') {
       return <FaMicrosoft />;
     } else if (companyName === 'amazon') {
       return <FaAmazon />;
-    } else if (companyName === 'facebook') {
+    } else if (companyName === 'Meta') {
       return <FaFacebook />;
     } else if (companyName === 'android') {
       return <FaAndroid />;
     } else if (companyName === 'twitter') {
       return <FaTwitter />;
     }
-    else if (companyName === 'instagram') {
-      return <FaInstagram />;
+    else if (companyName === 'nvidia') {
+      return <SiNvidia />;
     } else if (companyName === 'Airbnb') {
       return <FaAirbnb />;
     } 
@@ -81,8 +84,8 @@ function StockList() {
     } else if (companyName === 'paypal') {
       return <FaPaypal />;
     }
-    else if (companyName === 'eatsy') {
-      return <FaEtsy />;
+    else if (companyName === 'oracle') {
+      return <SiOracle />;
     }
     else if (companyName === 'square') {
       return <FaSquare />;
@@ -96,20 +99,20 @@ function StockList() {
   return (
     <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
     {stocks.map((stock, index) => (
-      <ListItem key={stock.idA}>
+      <ListItem key={stock.idA} onClick={(e)=>{handleSymbol(stock.symbole)}} >
         <ListItemAvatar>
-          <Avatar>{getIconForCompany(stock.name)}</Avatar>
+          <Avatar sx={{":hover":{cursor: 'pointer'}}}>{getIconForCompany(stock.name)}</Avatar>
         </ListItemAvatar>
-        <Grid container sx={{ width: '100%' }}>
+        <Grid container sx={{ width: '100%' }} >
           <Grid item xs={8}>
-            <Typography sx={{ fontFamily: 'Orbitron', fontSize: '12px' }}>
+            <Typography sx={{ fontFamily: 'Orbitron', fontSize: '12px' }} >
               {stock.symbole}
             </Typography>
           </Grid>
           <Grid item xs={2}>
             <Typography sx={{ fontFamily: 'Orbitron', fontSize: '12px' }}>
               {/* Display the simulated price instead of the real price */}
-              {simulatedPrices[index]}
+              {Prices[index]}
             </Typography>
           </Grid>
           <Grid

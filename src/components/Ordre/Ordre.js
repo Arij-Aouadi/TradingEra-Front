@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { AwesomeButton } from 'react-awesome-button';
 import 'react-awesome-button/dist/styles.css';
 import './assests/styling.css'
@@ -14,18 +14,72 @@ import FormHelperText from '@mui/material/FormHelperText';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import axiosInstance from '../../axios';
 
 
 const Ordre = () => {
-    const [typeOrdre, setTypeOrdre] = React.useState('10');
-    const [validite, setValidite] = React.useState('10');
+  const [typeOrdre, setTypeOrdre] = useState('');
+  const [validite, setValidite] = useState('');
+  const TypeStatut = {
+    ouvert: "ouvert",
+    ferme: "ferme",};
+  const [statut, setStatut] = useState(TypeStatut.ouvert);
+  const TypeTransaction = {
+    Buy :"Buy",
+    Sell:"Sell",
+  };
+  const [typetransaction, setTypeTransaction] = useState('');
 
-    const handleChangeTypeOrdre = (event) => {
-    setTypeOrdre(event.target.value);};
+  const handleChangeTypeOrdre = (event) => {
+    setTypeOrdre(event.target.value);
+    console.log('Valeur de typeOrdre :', event.target.value);
+};   const handleChangeValidite = (event) => {
+    setValidite(event.target.value);};
+    const [quantite, setQuantite] = useState(''); 
+    const handleChangeQuantite = (event) => {
+      setQuantite(event.target.value);
+    };
+    const [prixOrdre, setPrixOrdre] = useState(''); 
+    const handleChangePrixOrdre = (event) => {
+     setPrixOrdre(event.target.value);
+   };
+   const [prixStop, setPrixStop] = useState(''); 
+   const handleChangePrixStop = (event) => {
+    setPrixStop(event.target.value);
+  };
+  const [prixProfit, setPrixProfit] = useState(''); 
+   const handleChangePrixProfit = (event) => {
+    setPrixProfit(event.target.value);
+  };
+        const addOrdre = (ordreData) => {
+          axiosInstance
+            .post('/Ordre/add', ordreData)
+            .then((res) => {
+              console.log('Ordre ajouté avec succès :', res.data);
+              })
+            .catch((err) => {
+              console.error("Erreur lors de l'ajout de l'ordre :", err);
+              
+            });
+        };
+       
+      
+        const handleAjouterOrdre = () => {
+          const ordreAAjouter = {
+            typeOrdre: typeOrdre,
+            quantite,
+            prixOrdre,
+            dureeValiditeOrdre: validite,
+            statut,
+            prixStop,
+            prixProfit,
+            typetransaction,
+            
+          };
+          console.log('Données de l\'ordre :', ordreAAjouter);
 
-    const handleChangeValidite = (event) => {
-        setValidite(event.target.value);};
-    
+          addOrdre(ordreAAjouter);
+        };
 
   return (
     <Grid container Spacing={0} sx={{}}>
@@ -35,7 +89,6 @@ const Ordre = () => {
         </Grid>
 
         <Grid item xs={12} sx={{display:'flex',justifyContent:'space-between'}}>
-
         <FormControl size='small' sx={{ m: 1, minWidth: 135 }}>
         <Typography sx={{fontSize: '9px',mb:0.25,fontFamily:'Orbitron'}}>Type ordre</Typography>
         <Select
@@ -64,6 +117,7 @@ const Ordre = () => {
             }}
             sx={{height:'30px',fontFamily:'Orbitron',fontSize:'12px'}}
           />
+        
         </FormControl>
         
         </Grid>
