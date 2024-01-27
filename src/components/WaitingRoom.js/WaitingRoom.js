@@ -1,78 +1,83 @@
-import React, { Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
-import {
-  EffectComposer,
-  DepthOfField,
-  Bloom,
-  ChromaticAberration,
-} from "@react-three/postprocessing";
-import { BlendFunction } from "postprocessing";
-import {
-  CubeCamera,
-  Environment,
-  OrbitControls,
-  PerspectiveCamera,
-} from "@react-three/drei";
-import "./style.css";
-import { Boxes } from "./Boxes";
-import { Car } from "./Car";
-import { Ground } from "./Ground";
-import { FloatingGrid } from "./FloatingGrid";
-import { Rings } from "./Rings";
+import React from "react";
 import { motion } from "framer-motion";
-import { AwesomeButton } from 'react-awesome-button';
+import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
+import { useTimerContext } from "./TimerContext";
 
 
+function WaitingRoom() {
+  const { onStartTimer, isTimerOn } = useTimerContext(); // Use useTimerContext to access values
 
-function CarShow() {
   return (
-    <>
-      <OrbitControls 
-        target={[0, 0.35, 0]}
-        maxPolarAngle={1.45}
-      />
+    <motion.div 
+    initial={{ opacity: 0, scale: 0.1 }}
+    animate={{ opacity: 1, scale: 1 }}
+    exit={{transition: { ease: 'easeInOut' }}}
+     style={{width:"100%",
+     height:"100%",
+     display:'flex',
+     flexDirection:'column',
+     justifyContent:'center',
+     alignItems:'center'}} >
+      <motion.div
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{duration:0.5,delay:0.5}}
+      >
+        <Link to="/Jouer">
+            <Button 
+            sx={{
+            mb:4,
+            height:'7vh', 
+            width:'30vw',
+            textShadow: "0px 0px 0px rgb(255,255,255)",
+            boxShadow: "0px 0px 8px rgb(255,255,255)",
+            borderRadius: '22px',
+            fontFamily:'Orbitron',
+            fontSize:'19px'
+          }} variant="outlined" onClick={()=>{onStartTimer(true)}} >
+          Nouvelle Simulation</Button>
+      </Link></motion.div>
+      
+      <motion.div
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{duration:0.5,delay:0.6}}
+      >
+      <Link to="/base">
+            <Button sx={{
+            mb:4,
+            height:'7vh', 
+            width:'30vw',
+            textShadow: "0px 0px 0px rgb(255,255,255)",
+            boxShadow: "0px 0px 8px rgb(255,255,255)",
+            borderRadius: '22px',
+            fontFamily:'Orbitron',
+            fontSize:'19px'
+          }} variant="outlined">
+          Rejoindre une simulation</Button>
+      </Link></motion.div>
+          
+      <motion.div
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{duration:0.5,delay:0.7}}
+      >
+      <Link to="/base">
+            <Button sx={{
+            height:'7vh',
+            width:'30vw', 
+            textShadow: "0px 0px 0px rgb(255,255,255)",
+            boxShadow: "0px 0px 8px rgb(255,255,255)",
+            borderRadius: '22px',
+            fontFamily:'Orbitron',
+            fontSize:'19px'
+          }} variant="outlined">
+          Paramétres</Button>
+      </Link></motion.div>
 
-      <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]} />
-
-      <color args={[0, 0, 0]} attach="background" />
 
       
-      <spotLight
-        color={[0.97, 0.15, 0.52]}
-        intensity={150}
-        angle={10}
-        penumbra={0.5}
-        position={[5, 5, 0]}
-        castShadow
-        shadow-bias={-0.0001}
-      />
-      <spotLight
-        color={[0.3, 0.79, 0.94]}
-        intensity={150}
-        angle={10}
-        penumbra={0.5}
-        position={[-5, 5, 0]}
-        castShadow
-        shadow-bias={-0.0001}
-      />
-      <Ground />
-      <Boxes></Boxes>
-       
-     </>
-  );
-}
-
-function WaitingRoom({elements}) {
-  return (
-    <motion.div className="waiting-room-container">
-      <motion.div className="canvas-overlay">
-        <Canvas className="canvas" shadows>
-          <CarShow />
-        </Canvas>
-      </motion.div>
-      <motion.div className="content">
-        {elements}
-      </motion.div>
     </motion.div>
   );
 }

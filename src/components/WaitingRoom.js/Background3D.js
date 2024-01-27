@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
 import {
   EffectComposer,
@@ -21,10 +21,12 @@ import { FloatingGrid } from "./FloatingGrid";
 import { Rings } from "./Rings";
 import { motion } from "framer-motion";
 import { AwesomeButton } from 'react-awesome-button';
+import WaitingRoom from "./WaitingRoom";
+import { TimerProvider } from "./TimerContext";
 
 
 
-function CarShow() {
+const CarShow= React.memo(() => {
   return (
     <>
       <OrbitControls 
@@ -60,10 +62,11 @@ function CarShow() {
        
      </>
   );
-}
+  })
 
-function Background3D({elements}) {
+function Background3D({elements,onStartTimer,isTimerOn}) {
   return (
+    <TimerProvider onStartTimer={onStartTimer} isTimerOn={isTimerOn}>
     <motion.div className="waiting-room-container">
       <motion.div className="canvas-overlay">
         <Canvas className="canvas" shadows>
@@ -74,7 +77,8 @@ function Background3D({elements}) {
         {elements}
       </motion.div>
     </motion.div>
+    </TimerProvider>
   );
 }
 
-export default WaitingRoom;
+export default Background3D;

@@ -18,9 +18,19 @@ import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 import CustomSelect from '../Footer/Footer'
 import { Link } from 'react-router-dom';
 import Niveau from '../Niveau/Niveau';
-import WaitingRoom from '../WaitingRoom.js/WaitingRoom';
+import Background3D from '../WaitingRoom.js/Background3D';
+import { motion, Variants, Transition } from "framer-motion";
+import TimerComponent from '../Day/Day';
 
-
+function stringToBoolean(value) {
+  if (typeof value === 'string') {
+    const lowerCaseValue = value.toLowerCase();
+    if (lowerCaseValue === 'true') {
+      return true;
+    } else if (lowerCaseValue === 'false') {
+      return false;
+    }
+  }}
 
 
 
@@ -29,12 +39,18 @@ import WaitingRoom from '../WaitingRoom.js/WaitingRoom';
 const pages = ['Jouer', 'Options', 'Portefeuille','Apprendre','Historique','Competition','News',];
 
 
-
 export default function Layout({children,role,mode,handleModeChange}) {
   const theme = useTheme();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [days,setDays]= React.useState(null);
+  const [timePerDay,setTimePerDay] = React.useState(null);
+  const [isTimerOn, setIsTimerOn] = React.useState(stringToBoolean(localStorage.getItem('GameOn')));
 
+  
+  const handleStartTimer = (data) => {
+    setIsTimerOn(data);
+  };
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -91,7 +107,6 @@ export default function Layout({children,role,mode,handleModeChange}) {
             TradingEra
           </Typography>
           {pages.map((page) => (
-
                 <MenuItem key={page} component={Link} to={`/${page}`} sx={{fontSize:'13px',textDecoration: 'none', color: 'inherit',mb:2.5,'&:hover': {
                   borderRadius: '4px',height:25,textShadow: "0px 0px 5px rgb(255,255,255)"
                   ,color:'white'}}}>
@@ -101,6 +116,9 @@ export default function Layout({children,role,mode,handleModeChange}) {
 
           <Box sx={{ flexGrow: 1 }} />
 
+          <TimerComponent isTimerOn={isTimerOn} handleTimer={handleStartTimer}></TimerComponent>
+          <Box sx={{mb:2.5,mr:1.2,fontFamily:'Orbitron',textShadow: "0px 0px 5px rgb(255,255,255)",color:"white",fontSize:'12px' }} >
+            {'10.000'}{'   $'}</Box>
           <Box sx={{mb:2.5,mr:0.5 }}>
             <Niveau></Niveau>
             </Box>
@@ -147,8 +165,9 @@ export default function Layout({children,role,mode,handleModeChange}) {
                   </Toolbar>
       </AppBar>
             </Grid>
-          
-          <WaitingRoom elements={children}/>
+            
+            
+        <Background3D elements={children} onStartTimer={handleStartTimer} isTimerOn={isTimerOn}/>
         </Box>
         
         

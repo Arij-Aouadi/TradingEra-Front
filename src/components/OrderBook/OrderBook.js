@@ -1,31 +1,34 @@
 import React from 'react'
 import {Grid, Paper, ThemeProvider, Typography,Stack } from '@mui/material'
+import io from 'socket.io-client';
 
 function createData(prix, volume) {
-    return { prix, volume};
+  return { prix, volume };
+}
+
+
+const generateBuyersAndSellers = (coursActuel) => {
+  const margin = 0.1;
+  const buyers = [];
+  const sellers = [];
+  const mean = coursActuel;
+
+  for (let i = 1; i <= 7; i++) {
+    buyers.push(createData((mean - i * 0.1).toFixed(2), (Math.random() * 100).toFixed(2)));
+    sellers.push(createData((mean + i * 0.1).toFixed(2), (Math.random() * 100).toFixed(2)));
   }
-  const sellers = [
-    createData(215.14, 93.5),
-    createData(215.12, 54.3),
-    createData(215.01, 10.58),
-    createData(214.99, 89.65),
-    createData(214.98, 36.78),
-    createData(214.60, 24.78),
-    createData(214.57, 7.78),
-  ];
-  const buyers = [
-    createData(214.55, 94.5),
-    createData(214.53, 54.3),
-    createData(214.50, 10.58),
-    createData(214.49, 95.65),
-    createData(214.48, 8.78),
-    createData(214.45, 6.78),
-
-  ];
+  sellers.reverse();
+  return { buyers,sellers };
+};
 
   
-  
-const OrderBook = () => {
+const OrderBook = ({symbolOfOrders,coursActuel}) => {
+  //React.useEffect(()=>{
+  //console.log(coursActuel,symbolOfOrders)
+
+ // },[coursActuel,symbolOfOrders]);
+ const { buyers, sellers } = generateBuyersAndSellers(coursActuel);
+
   return (
     <Grid container sx={{display:'flex',justifyContent:'center',alignItems:'center'}}>
 
@@ -59,7 +62,7 @@ const OrderBook = () => {
         fontSize:'13.5px'
        
         }}>
-            <span>Cours Actuel 214.56 - +3%</span>
+            <span>Cours Actuel {symbolOfOrders}  {coursActuel}</span>
         </Paper>
 
     </Grid>

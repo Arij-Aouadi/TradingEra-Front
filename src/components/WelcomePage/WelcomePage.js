@@ -18,29 +18,29 @@ const WelcomePage = () => {
 
 
     const loadingInstructions = [
-      "Welcome to TradingEra! Get ready for an immersive trading experience.",
-      "Did you know? Diversifying your investment portfolio can help manage risk.",
-      "Pro tip: Stay updated with market trends to make informed trading decisions.",
-      "TradingEra Fact: Our AI-driven market analysis provides real-time insights.",
-      "Prepare for the market opening. Set your strategies and objectives.",
-      "Earning badges in TradingEra unlocks exclusive features. Keep trading!",
-      "Stay tuned for in-game events and challenges. Exciting rewards await!",
-      "Customize your trading interface in the settings for a personalized experience.",
-      "Invite friends to TradingEra and form trading alliances for mutual benefits.",
-      "Did you know? The in-game chat allows you to communicate with other traders.",
-      "Market volatility is normal. Adjust your trading strategies accordingly.",
-      "Explore different trading instruments to diversify your investment portfolio.",
-      "Level up your trading skills by completing in-game tutorials and challenges.",
-      "Unlock advanced features by reaching higher levels in TradingEra.",
-      "Keep an eye on the news feed for important market updates and announcements.",
-      "TradingEra Tip: Regularly review your trading performance to refine your strategy.",
-      "Join TradingEra communities to connect with fellow traders and share insights.",
-      "Discover hidden gems in the market by exploring lesser-known assets.",
-      "Stay patient during market fluctuations. Success in trading takes time.",
-      "Use technical analysis tools to analyze price charts and make data-driven decisions.",
-      "Secure your profits by setting stop-loss orders. Risk management is crucial!",
+      "Bienvenue dans TradingEra ! Préparez-vous pour une expérience immersive de trading.",
+      "Le saviez-vous ? Diversifier votre portefeuille d'investissement peut vous aider à gérer le risque.",
+      "Conseil professionnel : Restez informé des tendances du marché pour prendre des décisions éclairées en matière de trading.",
+      "Fait TradingEra : Notre analyse de marché pilotée par l'IA fournit des informations en temps réel.",
+      "Préparez-vous à l'ouverture du marché. Définissez vos stratégies et objectifs.",
+      "Gagner des badges dans TradingEra débloque des fonctionnalités exclusives. Continuez à trader !",
+      "Restez à l'écoute pour les événements et défis en jeu. Des récompenses passionnantes vous attendent !",
+      "Personnalisez votre interface de trading dans les paramètres pour une expérience personnalisée.",
+      "Invitez des amis à TradingEra et formez des alliances de trading pour des avantages mutuels.",
+      "Le saviez-vous ? Le chat en jeu vous permet de communiquer avec d'autres traders.",
+      "La volatilité du marché est normale. Ajustez vos stratégies de trading en conséquence.",
+      "Explorez différents instruments de trading pour diversifier votre portefeuille d'investissement.",
+      "Améliorez vos compétences en trading en suivant des tutoriels et des défis en jeu.",
+      "Débloquez des fonctionnalités avancées en atteignant des niveaux supérieurs dans TradingEra.",
+      "Gardez un œil sur le fil d'actualité pour des mises à jour importantes du marché et des annonces.",
+      "Conseil TradingEra : Revoyez régulièrement vos performances en trading pour affiner votre stratégie.",
+      "Rejoignez les communautés TradingEra pour vous connecter avec d'autres traders et partager des idées.",
+      "Découvrez des pépites cachées sur le marché en explorant des actifs moins connus.",
+      "Soyez patient pendant les fluctuations du marché. Le succès en trading prend du temps.",
+      "Utilisez des outils d'analyse technique pour analyser les graphiques de prix et prendre des décisions basées sur les données.",
+      "Sécurisez vos profits en définissant des ordres stop-loss. La gestion des risques est cruciale !",
     ];
-    
+
     // You can access each instruction using indexing, e.g., loadingInstructions[0]
     
 
@@ -52,7 +52,7 @@ const WelcomePage = () => {
           return 0;
 
         }
-        const diff = Math.random() * 10;
+        const diff = Math.random() * 5;
         return Math.min(oldProgress + diff, 100);
       });
     }, 500);
@@ -66,7 +66,7 @@ const WelcomePage = () => {
       if (loading===true){
       axios.post('http://localhost:5000/control_simulation',
       {"order":"start"}).then(res=>console.log(res.data)).catch(err=>console.log(err))
-      navigate('/Jouer')
+      navigate('/Waiting')
     }
     },[loading])
 

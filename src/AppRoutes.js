@@ -30,7 +30,7 @@ const AppRoutes = [
   },
   {
       path: '/Jouer',
-      element: <Home />
+      element: <Home/>
   },
   {
     path: '/Competition',

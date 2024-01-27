@@ -4,7 +4,7 @@ import './css/Style.css'
 
 let tvScriptLoadingPromise;
 
-export default function TradingViewWidget() {
+export default function TradingViewWidget({chartSymbol}) {
   const onLoadScriptRef = useRef();
 
   useEffect(
@@ -35,7 +35,7 @@ export default function TradingViewWidget() {
             autosize: true ,
             height: "auto",
             custom_css_url: 'css/Style.css',
-            symbol: "NASDAQ:AAPL",
+            symbol: `${chartSymbol}`,
             timezone: "Etc/UTC",
             theme: "dark",
             style: "1",
@@ -95,7 +95,7 @@ export default function TradingViewWidget() {
         }
       }
     },
-    []
+    [chartSymbol]
   );
 
   return (

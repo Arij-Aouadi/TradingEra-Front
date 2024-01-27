@@ -99,15 +99,22 @@ function LoginForm({mode,handleModeChange}) {
             })
         .then((res) => {
                 localStorage.setItem('access_token', res.data.token);
-                localStorage.setItem('isAuthenticated', true);
+                localStorage.setItem('isAuthenticated', "true");
                 localStorage.setItem('userId',res.data.id);
                 localStorage.setItem('userRole',res.data.roles[0]);
-                //localStorage.setItem('first_letter',res.data.email[0])
-                setSuccess(true)
+                localStorage.setItem('GameOn',"false")
+              
+                axiosInstance.get('/NiveauUser',{
+                    headers: {
+                     Authorization : `Bearer ${localStorage.getItem('access_token')}`,
+                    },
+                 }).then(response=>localStorage.setItem('niveau',response.data)).catch(error=>console.log(error))                //localStorage.setItem('first_letter',res.data.email[0])
+               
+                 setSuccess(true)
                 if(res.data.roles[0] == "CLIENT"){
                     axiosInstance.defaults.headers['Authorization'] =
                     'JWT ' + localStorage.getItem('access_token');
-                    window.location.href = '/Home'; 
+                    window.location.href = '/welcome'; 
                 }
                 else{
                     axiosInstance.defaults.headers['Authorization'] =
@@ -163,7 +170,7 @@ function LoginForm({mode,handleModeChange}) {
                                         type="submit"
                                         fullWidth
                                         variant="contained"
-                                        sx={{ mt: 3, mb: 2 }}
+                                        sx={{ mt: 3, mb: 2,backgroundColor: '#000000', ":hover":{boxShadow: "0px 0px 5px rgb(255,255,255)"} }}
                                     >
                                     submit
                                     </Button>
