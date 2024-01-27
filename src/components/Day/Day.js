@@ -7,10 +7,10 @@ import io from 'socket.io-client';
 
 const TimerComponent = ({isTimerOn,handleTimer}) => {
   const [days, setDays] = useState(1);
-  const [timePerDay, setTimePerDay] = useState(5); // 15 minutes in seconds
+  const [numbersOfDays,setNumberOfDays]=useState(parseInt(localStorage.getItem('numberOfDays')));
+  const [timePerDay, setTimePerDay] = useState(parseInt(localStorage.getItem('timePerDay'))*60); // 15 minutes in seconds
   const [currentTime, setCurrentTime] = useState(timePerDay);
   const [isFrozen,setIsFrozen] = useState(false);
-  const [startOrFinish,setStartOrFinish] = useState('');
 
   React.useEffect(()=>{
     const socket = io('http://127.0.0.1:5000/'); 
@@ -26,13 +26,15 @@ const TimerComponent = ({isTimerOn,handleTimer}) => {
     else {
         handleControlSimulation('continue')
     } 
-    if (startOrFinish=='finish'){
-        console.log('stop simulation')
-        handleControlSimulation('stop')
+    if ((isTimerOn)&&(!isFrozen)){
+        handleControlSimulation('start')
+    }
+    if ((!isTimerOn)&&(!isFrozen)) {
+        handleControlSimulation('freeze')
     }
   
     
-  },[isFrozen]);
+  },[isFrozen,isTimerOn]);
 
 
   useEffect(() => {
@@ -50,10 +52,8 @@ const TimerComponent = ({isTimerOn,handleTimer}) => {
               // Stop the timer when all days are completed
               clearInterval(interval);
               handleTimer(false);
-              setStartOrFinish('finish')
               localStorage.setItem('GameOn','false')
               window.location.href = '/waiting'; 
-              setStartOrFinish('')
               return 0;
             }
 
