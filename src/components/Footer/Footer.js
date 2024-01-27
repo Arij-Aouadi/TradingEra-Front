@@ -20,6 +20,7 @@ import { FaPaperPlane } from 'react-icons/fa';
 import { FiMessageSquare } from 'react-icons/fi';
 import { FaRobot } from 'react-icons/fa';
 import io from 'socket.io-client';
+import axios from 'axios';
 
 
 
@@ -128,10 +129,45 @@ const ChatInterface = ({ onClose }) => {
 };
   
 
-const CustomSelect = () => {
+const CustomSelect = ({prices,findIndex,symbols_to_simulate}) => {
   const [selectedOption, setSelectedOption] = React.useState('top-gaining');
   const [showChatInterface, setShowChatInterface] = React.useState(false);
-  const [variationEnPorcentage, setVariationEnPorcentage] = React.useState([])
+  const [variationEnPorcentage, setVariationEnPorcentage] = React.useState([]);
+  const [initialPrices, setInitialPrices]= React.useState([]);
+  const [topGaining, setTopGaining] = React.useState([]);
+
+
+  React.useEffect(()=>{
+    axios.get('http://127.0.0.1:5000/getInitialPrices').then((res) => {
+      setInitialPrices(res.data.initial)
+    })
+    .catch((err) => {
+      // Gérer les erreurs de requête
+    });
+
+  },[]);
+
+  React.useEffect(() => {
+    const calculateGains = () => {
+      const gains = prices.map((currentPrice, index) => {
+        const openingPrice = initialPrices[index];
+        const gain = ((currentPrice - openingPrice) / openingPrice) * 100;
+        return { symbol: symbols_to_simulate[index], gain };
+      });
+
+      // Sort the gains array based on the gain value in descending order
+      gains.sort((a, b) => b.gain - a.gain);
+
+      // Get the symbols of the top gaining stocks
+      const topGainingSymbols = gains.slice(0, 5).map(stock => stock.symbol);
+
+      setTopGaining(topGainingSymbols);
+    };
+
+    if (prices.length > 0 && initialPrices.length > 0) {
+      calculateGains();
+    }
+  }, [prices, initialPrices]);
 
   React.useEffect(()=>{
     const socket = io('http://127.0.0.1:5000/'); 
@@ -139,7 +175,7 @@ const CustomSelect = () => {
     socket.on('my_response', (data) => {
       setVariationEnPorcentage(data.variationEn)
       });
-
+    
   },[]);
 
   const handleChange = (event) => {
@@ -204,12 +240,18 @@ const CustomSelect = () => {
         </Select>
 
         {selectedOption && (
-          <List sx={{ display: 'flex', flexDirection: 'row', padding: 0, marginLeft: '16px' }}>
-            {/* Ajoutez les éléments de la liste horizontale ici */}
-            <ListItem sx={{minWidth:120}}>APPL <span style={{color:variationEnPorcentage[1] <= 0? '#f72585': '#4CC9F0'}}> {variationEnPorcentage[1]}</span></ListItem>
-            <ListItem sx={{minWidth:120}}>AMZN <span style={{color:variationEnPorcentage[3] <= 0? '#f72585': '#4CC9F0'}}>{variationEnPorcentage[3]}</span></ListItem>
-            <ListItem sx={{minWidth:120}}>PYPL <span style={{color:variationEnPorcentage[9] <= 0? '#f72585': '#4CC9F0'}}>{variationEnPorcentage[9]}</span></ListItem>
-          </List>
+         <List sx={{ display: 'flex', flexDirection: 'row', padding: 0, marginLeft: '16px' }}>
+         {topGaining.map((symbol, index) => (
+           <ListItem key={index} sx={{ minWidth: 125,display: 'flex',flexDirection: 'row', justifyContent: 'space-around'}}>
+              <div>
+             {symbol}</div>
+             <div style={{ color: variationEnPorcentage[symbols_to_simulate.indexOf(symbol)] <= 0 ? '#f72585' : '#4CC9F0' }}>
+               {variationEnPorcentage[symbols_to_simulate.indexOf(symbol)]} {'%'}
+             </div>
+           </ListItem>
+         ))}
+       </List>
+       
         )}
       
       <Button variant="outlined" size="medium" style={{ marginLeft: 'auto' }} onClick={toggleChatInterface}>

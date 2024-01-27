@@ -2,10 +2,12 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
-
+import { useTimerContext } from "./TimerContext";
 
 
 function WaitingRoom() {
+  const { onStartTimer, isTimerOn } = useTimerContext(); // Use useTimerContext to access values
+
   return (
     <motion.div 
     initial={{ opacity: 0, scale: 0.1 }}
@@ -33,7 +35,7 @@ function WaitingRoom() {
             borderRadius: '22px',
             fontFamily:'Orbitron',
             fontSize:'19px'
-          }} variant="outlined" >
+          }} variant="outlined" onClick={()=>{onStartTimer(true)}} >
           Nouvelle Simulation</Button>
       </Link></motion.div>
       

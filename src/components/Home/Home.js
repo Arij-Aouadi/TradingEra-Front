@@ -107,7 +107,7 @@ const Home = () => {
 
       <Grid item xs={12} height="10%">
         <Paper sx={{background: `linear-gradient(135deg,#000000, #1e222d) `}}>
-          <CustomSelect> </CustomSelect>  </Paper>
+          <CustomSelect prices={simulatedPrices} findIndex={findIndexInList} symbols_to_simulate={symbols}> </CustomSelect>  </Paper>
       </Grid>
 
     </Grid>

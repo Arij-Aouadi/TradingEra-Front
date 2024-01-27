@@ -21,6 +21,8 @@ import { FloatingGrid } from "./FloatingGrid";
 import { Rings } from "./Rings";
 import { motion } from "framer-motion";
 import { AwesomeButton } from 'react-awesome-button';
+import WaitingRoom from "./WaitingRoom";
+import { TimerProvider } from "./TimerContext";
 
 
 
@@ -62,8 +64,9 @@ const CarShow= React.memo(() => {
   );
   })
 
-function Background3D({elements}) {
+function Background3D({elements,onStartTimer,isTimerOn}) {
   return (
+    <TimerProvider onStartTimer={onStartTimer} isTimerOn={isTimerOn}>
     <motion.div className="waiting-room-container">
       <motion.div className="canvas-overlay">
         <Canvas className="canvas" shadows>
@@ -74,6 +77,7 @@ function Background3D({elements}) {
         {elements}
       </motion.div>
     </motion.div>
+    </TimerProvider>
   );
 }
 
