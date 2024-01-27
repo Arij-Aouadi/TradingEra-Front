@@ -21,6 +21,8 @@ import Niveau from '../Niveau/Niveau';
 import Background3D from '../WaitingRoom.js/Background3D';
 import { motion, Variants, Transition } from "framer-motion";
 import TimerComponent from '../Day/Day';
+import StopIcon from '@mui/icons-material/Stop';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 function stringToBoolean(value) {
   if (typeof value === 'string') {
@@ -64,6 +66,12 @@ export default function Layout({children,role,mode,handleModeChange}) {
   const menuId = 'primary-search-account-menu';
  
   const mobileMenuId = 'primary-search-account-menu-mobile'; 
+
+  const handleLogoutClick = () => {
+    setIsTimerOn(false)
+    localStorage.setItem('GameOn','false')
+    window.location.href = '/waiting';
+  };
   
  
   return (
@@ -96,7 +104,7 @@ export default function Layout({children,role,mode,handleModeChange}) {
 
       <AppBar position="static" sx={{height:'40px',background: `linear-gradient(135deg,#000000, #1e222d) `}}>
         <Toolbar sx={{height:'40px'}} >
-
+        <Link to="/waiting">
           <Typography
             variant="h5"
             noWrap
@@ -105,7 +113,7 @@ export default function Layout({children,role,mode,handleModeChange}) {
           }}
           >
             TradingEra
-          </Typography>
+          </Typography></Link>
           {pages.map((page) => (
                 <MenuItem key={page} component={Link} to={`/${page}`} sx={{fontSize:'13px',textDecoration: 'none', color: 'inherit',mb:2.5,'&:hover': {
                   borderRadius: '4px',height:25,textShadow: "0px 0px 5px rgb(255,255,255)"
@@ -124,9 +132,12 @@ export default function Layout({children,role,mode,handleModeChange}) {
             </Box>
 
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton  size="small" aria-label="show 4 new mails" color={theme.palette.secondary.light} sx={{mb:2.5}}>
-                <AppsOutlinedIcon fontSize='small' />
-            </IconButton>
+          {isTimerOn ? (
+  <IconButton  onClick={handleLogoutClick} size="small" aria-label="show 4 new mails" color={theme.palette.secondary.light} sx={{ mb: 2.5 }}>
+    <LogoutIcon color='secondary' fontSize='small' />
+  </IconButton>
+) : null}
+
             <IconButton
               size="small"
               aria-label="show 17 new notifications"
